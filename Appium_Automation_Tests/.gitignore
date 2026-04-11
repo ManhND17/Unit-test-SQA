@@ -1,0 +1,28 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Test reports
+allure-results/
+screenshots/
+videos/
+
+# Typescript
+*.tsbuildinfo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# WebdriverIO
+.wdio-cache/
+errorShots/

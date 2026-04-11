@@ -1,0 +1,45 @@
+/* Styles cho ScheduleView (dựa trên calendar.css) */
+#scheduleGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+}
+
+#scheduleGrid > div {
+  min-height: 64px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+#scheduleGrid > div:hover {
+  background-color: rgba(31, 41, 55, 0.03); /* tailwind gray-900/5 */
+}
+
+#scheduleGrid > div .text-xs {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#scheduleGrid > div.selected {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+#scheduleGrid > div .bg-gray-100 {
+  background-color: #f3f4f6; /* tailwind gray-100 */
+}
+
+/* Responsive small tweaks */
+@media (max-width: 640px) {
+  #scheduleGrid > div {
+    min-height: 56px;
+    padding: 0.4rem;
+  }
+}

@@ -1,0 +1,46 @@
+.cms-datepicker-gray {
+  flex-direction: unset !important;
+  min-width: 160px !important;
+  background-color: #f2f2f3;
+  border-radius: 8px !important;
+  input {
+    font-size: 14px;
+    font-weight: 400;
+    min-height: 23px;
+  }
+  .MuiInputBase-root {
+    border-radius: 8px !important;
+  }
+  &:hover {
+    .MuiOutlinedInput-notchedOutline {
+      border: 1px solid #dcdee0 !important;
+    }
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #dcdee0 !important;
+  }
+}
+
+.cms-datepicker-white {
+  flex-direction: unset !important;
+  min-width: 160px !important;
+  background-color: #fff;
+  border-radius: 4px !important;
+  input {
+    font-size: 14px;
+    font-weight: 400;
+    min-height: 23px;
+  }
+  .MuiInputBase-root {
+    border-radius: 4px !important;
+    width: 100%;
+  }
+  &:hover {
+    .MuiOutlinedInput-notchedOutline {
+      border: 1px solid #d9d9d9 !important;
+    }
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #d9d9d9 !important;
+  }
+}

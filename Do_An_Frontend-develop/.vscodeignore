@@ -1,0 +1,12 @@
+# Ignore files for VS Code extension
+.git
+.gitignore
+.eslintcache
+node_modules
+dist
+build
+coverage
+*.log
+*.tsbuildinfo
+.DS_Store
+tasks
