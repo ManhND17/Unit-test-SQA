@@ -5,7 +5,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const serviceDirname = 
+    typeof __dirname !== 'undefined'
+        ? __dirname
+        : path.dirname(fileURLToPath(eval('import.meta.url')));
 
 interface IOTPGenerator {
     generate(length: number): string;
@@ -193,7 +196,7 @@ class EmailOTPSender implements IOTPSender {
         }
 
         const templatePath = path.join(
-            __dirname,
+            serviceDirname,
             `../templates/${templateName}.html`
         );
         const template = fs.readFileSync(templatePath, 'utf-8');
@@ -251,7 +254,7 @@ export interface IOTPServiceConfig {
     resendCooldownSeconds?: number;
 }
 
-class OTPService {
+export class OTPService {
     private readonly otpLength: number;
     private readonly expiresInSeconds: number;
     private readonly resendCooldownSeconds: number;

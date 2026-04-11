@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "ignoreDeprecations": "5.0",
         // Target và module cho Node.js
         "target": "ES2022",
         "module": "esnext",
@@ -54,7 +55,7 @@
 
         // Library cho Node.js
         "lib": ["ES2022"],
-        "types": ["node"],
+        "types": ["node", "jest"],
 
         // Type checking
         "isolatedModules": true
@@ -65,8 +66,6 @@
         "dist",
         "build",
         "coverage",
-        "**/*.spec.ts",
-        "**/*.test.ts",
         "**/*.config.*"
     ],
     "ts-node": {
