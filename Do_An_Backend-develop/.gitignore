@@ -13,4 +13,3 @@ generated/
 !README.md
 database/seed/
 database/seeds/
-tests/

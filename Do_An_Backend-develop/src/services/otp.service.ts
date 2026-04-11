@@ -5,10 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const serviceDirname = 
-    typeof __dirname !== 'undefined'
-        ? __dirname
-        : path.dirname(fileURLToPath(eval('import.meta.url')));
+const serviceDirname = path.dirname(fileURLToPath(import.meta.url));
 
 interface IOTPGenerator {
     generate(length: number): string;
