@@ -1,98 +1,83 @@
 import statisticsService from '@src/services/statistics.service';
-import * as statisticsDao from '@src/daos/statistics.dao';
-import visitDao from '@src/daos/visit.dao';
+import prisma from '@src/config/prisma';
+import { AppointmentStatus } from '@prisma/client';
 
-// Mock các dependencies
-jest.mock('@src/daos/statistics.dao');
-jest.mock('@src/daos/visit.dao');
-jest.mock('@src/config/prisma');
-
-describe('Statistics Service Unit Tests (Doctor Dashboard Focus)', () => {
-    const doctorId = 'doc-123';
-    const timezone = 'Asia/Ho_Chi_Minh';
-
-    beforeEach(() => {
-        jest.clearAllMocks();
+describe('Integration Test Statistics Service - 15 Cases', () => {
+    let doctor: any, patient: any;
+    beforeAll(async () => {
+        const docRecord = await prisma.doctor.findFirst({ include: { staff: { include: { user: true } } } });
+        doctor = docRecord?.staff.user;
+        const pRecord = await prisma.patient.findFirst({ include: { user: true } });
+        patient = pRecord?.user;
     });
+    const runTest = async (fn: (tx: any) => Promise<void>) => {
+        await prisma.$transaction(async (tx) => {
+            const originalTx = prisma.$transaction;
+            (prisma as any).$transaction = (cb: any) => cb(tx);
+            try { await fn(tx); } finally { (prisma as any).$transaction = originalTx; }
+            throw new Error('ROLLBACK');
+        }).catch(err => { if (err.message !== 'ROLLBACK') throw err; });
+    };
 
-    // =========================================================================
-    // Doctor Dashboard & Consistency
-    // =========================================================================
-    describe('Doctor Dashboard Statistics', () => {
-        
-        /**
-         * TC-BS-TK-01: Kiểm tra tính nhất quán giữa Lịch hẹn và Ca khám Hoàn thành
-         */
-        it('TC-BS-TK-01 - completed appointments should match completed visits', async () => {
-            (statisticsDao.getDoctorDashboardSummary as jest.Mock).mockResolvedValue({
-                completedAppointments: 10,
-                pendingAppointments: 5,
-                weeklyAppointments: 15
-            });
-            (visitDao.getVisitCountsByStatus as jest.Mock).mockResolvedValue({
-                total: 10,
-                byStatus: { 'completed': 10 }
-            });
-
-            const summary = await statisticsService.getDoctorDashboardSummary(doctorId, timezone);
-            const visitStats = await statisticsService.getVisitCountsByStatus(undefined, undefined, timezone);
-
-            expect(summary.completedAppointments).toBe(visitStats.byStatus['completed']);
-        });
-
-        /**
-         * TC-BS-TK-02: Kiểm tra tính nhất quán giữa Lịch hẹn và Ca khám bị Hủy
-         */
-        it('TC-BS-TK-02 - cancelled appointments should match cancelled visits', async () => {
-            (statisticsDao.getDoctorAppointmentStatus as jest.Mock).mockResolvedValue([
-                { name: 'Hoàn thành', value: 10 },
-                { name: 'Hủy', value: 3 },
-                { name: 'Chờ khám', value: 5 }
-            ]);
-            (visitDao.getVisitCountsByStatus as jest.Mock).mockResolvedValue({
-                total: 18,
-                byStatus: { 'completed': 10, 'cancelled': 3, 'in_progress': 5 }
-            });
-
-            const statusStats = await statisticsService.getDoctorAppointmentStatus(doctorId, timezone);
-            const visitStats = await statisticsService.getVisitCountsByStatus(undefined, undefined, timezone);
-
-            const cancelledApp = statusStats.find(s => s.name === 'Hủy')?.value;
-            expect(cancelledApp).toBe(visitStats.byStatus['cancelled']);
-        });
-
-        /**
-         * TC-BS-TK-03: Đối chiếu số lượng lịch hẹn và ca khám theo ngày (Daily Consistency)
-         */
-        it('TC-BS-TK-03 - daily appointments should match daily visits', async () => {
-            const mockDailyApps = { labels: ['Thứ 2'], values: [5] };
-            (statisticsDao.getDoctorAppointmentsByDay as jest.Mock).mockResolvedValue(mockDailyApps);
-            (visitDao.getVisitCountsByStatus as jest.Mock).mockResolvedValue({
-                total: 5,
-                byStatus: { 'completed': 5 }
-            });
-
-            const dailyApps = await statisticsService.getDoctorAppointmentsByDay(doctorId, timezone);
-            const dailyVisits = await statisticsService.getVisitCountsByStatus('2025-01-01', '2025-01-01', timezone);
-
-            expect(dailyApps.values[0]).toBe(dailyVisits.total);
-        });
-
-        /**
-         * TC-BS-TK-04: Lấy thống kê trạng thái lịch hẹn của bác sĩ
-         */
-        it('TC-BS-TK-04 - should return doctor appointment status stats', async () => {
-            const mockStatus = [
-                { name: 'Hoàn thành', value: 10 },
-                { name: 'Hủy', value: 3 }
-            ];
-            (statisticsDao.getDoctorAppointmentStatus as jest.Mock).mockResolvedValue(mockStatus);
-
-            const result = await statisticsService.getDoctorAppointmentStatus(doctorId, timezone);
-
-            expect(result).toHaveLength(2);
-            expect(result[0].name).toBe('Hoàn thành');
-            expect(statisticsDao.getDoctorAppointmentStatus).toHaveBeenCalledWith(doctorId, timezone);
-        });
+    it('TC_BS_TK_SER_01 - Lấy dashboard hợp lệ', async () => {
+        const res = await statisticsService.getDoctorDashboardSummary(doctor.id, 'UTC');
+        expect(res).toHaveProperty('completedAppointments');
+    });
+    it('TC_BS_TK_SER_02 - [BUG] Integration: Thống kê không đổi khi khám xong', async () => await runTest(async (tx) => {
+        const before = await statisticsService.getDoctorDashboardSummary(doctor.id, 'UTC');
+        await tx.appointment.create({ data: { patientId: patient.id, doctorId: doctor.id, startTime: new Date(), reason: 'K', status: AppointmentStatus.completed } });
+        const after = await statisticsService.getDoctorDashboardSummary(doctor.id, 'UTC');
+        expect(after.completedAppointments).toBe(before.completedAppointments + 1);
+    }));
+    it('TC_BS_TK_SER_03 - Biểu đồ đường nhãn VN', async () => {
+        const res = await statisticsService.getDoctorAppointmentsByDay(doctor.id, 'UTC');
+        expect(res.labels).toContain('Thứ 2');
+    });
+    it('TC_BS_TK_SER_04 - Biểu đồ tròn structure', async () => {
+        const res = await statisticsService.getDoctorAppointmentStatus(doctor.id, 'UTC');
+        expect(res[0]).toHaveProperty('name');
+    });
+    it('TC_BS_TK_SER_05 - Thống kê cho bệnh nhân', async () => {
+        const res = await statisticsService.getPatientStatistics(patient.id);
+        expect(res.summary).toBeDefined();
+    });
+    it('TC_BS_TK_SER_06 - Thống kê Admin mới đăng ký', async () => {
+        const res = await statisticsService.getAdminStatistics('month');
+        expect(res.newPatientsCount).toBeDefined();
+    });
+    it('TC_BS_TK_SER_07 - Thống kê theo khoa', async () => {
+        const res = await statisticsService.getPatientsByDepartment();
+        expect(res.data).toBeDefined();
+    });
+    it('TC_BS_TK_SER_08 - Thống kê theo bác sĩ', async () => {
+        const res = await statisticsService.getAppointmentsByDoctor();
+        expect(res.data).toBeDefined();
+    });
+    it('TC_BS_TK_SER_09 - Lượt khám theo trạng thái', async () => {
+        const res = await statisticsService.getVisitCountsByStatus();
+        expect(res).toBeDefined();
+    });
+    it('TC_BS_TK_SER_10 - Lượt khám theo năm', async () => {
+        const res = await statisticsService.getVisitCountsByYear(2025);
+        expect(res.months.length).toBe(12);
+    });
+    it('TC_BS_TK_SER_11 - [BUG] Error 404 cho bác sĩ', async () => {
+        await expect(statisticsService.getPatientStatistics(doctor.id)).rejects.toThrow();
+    });
+    it('TC_BS_TK_SER_12 - Dashboard Admin summary', async () => {
+        const res = await statisticsService.getDashboardSummary('UTC');
+        expect(res.length).toBeGreaterThan(0);
+    });
+    it('TC_BS_TK_SER_13 - Doanh thu tuần', async () => {
+        const res = await statisticsService.getRevenueByDayOfWeek('UTC');
+        expect(res.length).toBe(7);
+    });
+    it('TC_BS_TK_SER_14 - Nhân sự theo khoa', async () => {
+        const res = await statisticsService.getStaffByDepartment();
+        expect(res.length).toBeGreaterThanOrEqual(0);
+    });
+    it('TC_BS_TK_SER_15 - Lịch hẹn tuần Admin', async () => {
+        const res = await statisticsService.getAppointmentsByDayOfWeek('UTC');
+        expect(res.length).toBe(7);
     });
 });

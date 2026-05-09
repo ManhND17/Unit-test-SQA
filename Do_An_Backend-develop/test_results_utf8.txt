@@ -1,0 +1,1709 @@
+﻿npx : ts-jest[ts-jest-transformer] (WARN) Define `ts-jest` config under `globals` is deprecated. Please do
+At line:1 char:1
++ npx jest src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_ma ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ts-jest[ts-jest...ated. Please do:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+transform: {
+    <transform_regex>: ['ts-jest', { /* ts-jest config goes here in Jest */ }],
+},
+See more at https://kulshekhar.github.io/ts-jest/docs/getting-started/presets#advanced
+  console.error
+    QueryBuilder Error [visitService.findManyWithPagination]: PrismaClientValidationError: 
+    Invalid `this.delegate.findMany()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:154:31
+    
+      151 const skip = limit ? (page - 1) * limit : undefined;
+      152 
+      153 const [data, totalItems] = await Promise.all([
+    â†’ 154     this.delegate.findMany({
+                where: {
+                  visitId: {
+                    in: []
+                  }
+                },
+                include: {
+                  visit: {
+                    include: {
+                      patient: {
+                        include: {
+                          user: {
+                            select: {
+                              name: true,
+                              phone: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  medicalService: {
+                    select: {
+                      id: true,
+                      name: true,
+                      price: true
+                    }
+                  }
+                },
+                orderBy: {
+                  createdAt: "desc"
+                },
+                skip: undefined,
+              + take: Int
+              })
+    
+    Argument `take` is missing.
+        at Nn (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\core\errorRendering\throwValidationException.ts:45:9)
+        at ei.throwValidationException [as handleRequestError] (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:202:7)
+        at ei.handleAndLogRequestError (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+        at ei.request (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+        at a (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+        at async Promise.all (index 0)
+        at QueryBuilder.findManyWithPagination (D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:153:40)
+        at VisitServiceDAO.findAll (D:\Unit-test-SQA\Do_An_Backend-develop\src\daos\visit-service.dao.ts:147:16)
+        at VisitServiceService.listServiceUsages (D:\Unit-test-SQA\Do_An_Backend-develop\src\services\visit-service.service.ts:118:16)
+        at D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:496:29
+        at D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:41:23
+        at Proxy._transactionWithCallback (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:722:18)
+        at runTest (D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:32:13)
+        at Object.<anonymous> (D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:495:13) {
+      clientVersion: '6.16.3'
+    }
+
+    [0m [90m 411 |[39m
+     [90m 412 |[39m     [36mprivate[39m handleError(error[33m:[39m any[33m,[39m operation[33m:[39m string)[33m:[39m never {
+    [31m[1m>[22m[39m[90m 413 |[39m         console[33m.[39merror(
+     [90m     |[39m                 [31m[1m^[22m[39m
+     [90m 414 |[39m             [32m`QueryBuilder Error [${String(this.model)}.${operation}]:`[39m[33m,[39m
+     [90m 415 |[39m             error
+     [90m 416 |[39m         )[33m;[39m[0m
+
+      at QueryBuilder.handleError (src/helpers/queryBuilder.ts:413:17)
+      at QueryBuilder.findManyWithPagination (src/helpers/queryBuilder.ts:180:18)
+      at VisitServiceDAO.findAll (src/daos/visit-service.dao.ts:147:16)
+      at VisitServiceService.listServiceUsages (src/services/visit-service.service.ts:118:16)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:496:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:495:13)
+
+  console.error
+    QueryBuilder Error [visitService.findManyWithPagination]: PrismaClientValidationError: 
+    Invalid `this.delegate.findMany()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:154:31
+    
+      151 const skip = limit ? (page - 1) * limit : undefined;
+      152 
+      153 const [data, totalItems] = await Promise.all([
+    â†’ 154     this.delegate.findMany({
+                where: {},
+                include: {
+                  visit: {
+                    include: {
+                      patient: {
+                        include: {
+                          user: {
+                            select: {
+                              name: true,
+                              phone: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  medicalService: {
+                    select: {
+                      id: true,
+                      name: true,
+                      price: true
+                    }
+                  }
+                },
+                orderBy: {
+                  createdAt: "desc"
+                },
+                skip: undefined,
+              + take: Int
+              })
+    
+    Argument `take` is missing.
+        at Nn (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\core\errorRendering\throwValidationException.ts:45:9)
+        at ei.throwValidationException [as handleRequestError] (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:202:7)
+        at ei.handleAndLogRequestError (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+        at ei.request (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+        at a (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+        at async Promise.all (index 0)
+        at QueryBuilder.findManyWithPagination (D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:153:40)
+        at VisitServiceDAO.findAll (D:\Unit-test-SQA\Do_An_Backend-develop\src\daos\visit-service.dao.ts:147:16)
+        at VisitServiceService.listServiceUsages (D:\Unit-test-SQA\Do_An_Backend-develop\src\services\visit-service.service.ts:118:16)
+        at D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:592:29
+        at D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:41:23
+        at Proxy._transactionWithCallback (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:722:18)
+        at runTest (D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:32:13)
+        at Object.<anonymous> (D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:591:13) {
+      clientVersion: '6.16.3'
+    }
+
+    [0m [90m 411 |[39m
+     [90m 412 |[39m     [36mprivate[39m handleError(error[33m:[39m any[33m,[39m operation[33m:[39m string)[33m:[39m never {
+    [31m[1m>[22m[39m[90m 413 |[39m         console[33m.[39merror(
+     [90m     |[39m                 [31m[1m^[22m[39m
+     [90m 414 |[39m             [32m`QueryBuilder Error [${String(this.model)}.${operation}]:`[39m[33m,[39m
+     [90m 415 |[39m             error
+     [90m 416 |[39m         )[33m;[39m[0m
+
+      at QueryBuilder.handleError (src/helpers/queryBuilder.ts:413:17)
+      at QueryBuilder.findManyWithPagination (src/helpers/queryBuilder.ts:180:18)
+      at VisitServiceDAO.findAll (src/daos/visit-service.dao.ts:147:16)
+      at VisitServiceService.listServiceUsages (src/services/visit-service.service.ts:118:16)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:592:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:591:13)
+
+  console.error
+    QueryBuilder Error [visitService.findManyWithPagination]: PrismaClientValidationError: 
+    Invalid `this.delegate.findMany()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:154:31
+    
+      151 const skip = limit ? (page - 1) * limit : undefined;
+      152 
+      153 const [data, totalItems] = await Promise.all([
+    â†’ 154     this.delegate.findMany({
+                where: {
+                  status: "done"
+                },
+                include: {
+                  visit: {
+                    include: {
+                      patient: {
+                        include: {
+                          user: {
+                            select: {
+                              name: true,
+                              phone: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  medicalService: {
+                    select: {
+                      id: true,
+                      name: true,
+                      price: true
+                    }
+                  }
+                },
+                orderBy: {
+                  createdAt: "desc"
+                },
+                skip: undefined,
+              + take: Int
+              })
+    
+    Argument `take` is missing.
+        at Nn (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\core\errorRendering\throwValidationException.ts:45:9)
+        at ei.throwValidationException [as handleRequestError] (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:202:7)
+        at ei.handleAndLogRequestError (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+        at ei.request (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+        at a (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+        at async Promise.all (index 0)
+        at QueryBuilder.findManyWithPagination (D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:153:40)
+        at VisitServiceDAO.findAll (D:\Unit-test-SQA\Do_An_Backend-develop\src\daos\visit-service.dao.ts:147:16)
+        at VisitServiceService.listServiceUsages (D:\Unit-test-SQA\Do_An_Backend-develop\src\services\visit-service.service.ts:118:16)
+        at D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:633:29
+        at D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:41:23
+        at Proxy._transactionWithCallback (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:722:18)
+        at runTest (D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:32:13)
+        at Object.<anonymous> (D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:632:13) {
+      clientVersion: '6.16.3'
+    }
+
+    [0m [90m 411 |[39m
+     [90m 412 |[39m     [36mprivate[39m handleError(error[33m:[39m any[33m,[39m operation[33m:[39m string)[33m:[39m never {
+    [31m[1m>[22m[39m[90m 413 |[39m         console[33m.[39merror(
+     [90m     |[39m                 [31m[1m^[22m[39m
+     [90m 414 |[39m             [32m`QueryBuilder Error [${String(this.model)}.${operation}]:`[39m[33m,[39m
+     [90m 415 |[39m             error
+     [90m 416 |[39m         )[33m;[39m[0m
+
+      at QueryBuilder.handleError (src/helpers/queryBuilder.ts:413:17)
+      at QueryBuilder.findManyWithPagination (src/helpers/queryBuilder.ts:180:18)
+      at VisitServiceDAO.findAll (src/daos/visit-service.dao.ts:147:16)
+      at VisitServiceService.listServiceUsages (src/services/visit-service.service.ts:118:16)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:633:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:632:13)
+
+  console.error
+    QueryBuilder Error [visitService.findManyWithPagination]: PrismaClientValidationError: 
+    Invalid `this.delegate.findMany()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:154:31
+    
+      151 const skip = limit ? (page - 1) * limit : undefined;
+      152 
+      153 const [data, totalItems] = await Promise.all([
+    â†’ 154     this.delegate.findMany({
+                where: {},
+                include: {
+                  visit: {
+                    include: {
+                      patient: {
+                        include: {
+                          user: {
+                            select: {
+                              name: true,
+                              phone: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  medicalService: {
+                    select: {
+                      id: true,
+                      name: true,
+                      price: true
+                    }
+                  }
+                },
+                orderBy: {
+                  createdAt: "desc"
+                },
+                skip: undefined,
+              + take: Int
+              })
+    
+    Argument `take` is missing.
+        at Nn (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\core\errorRendering\throwValidationException.ts:45:9)
+        at ei.throwValidationException [as handleRequestError] (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:202:7)
+        at ei.handleAndLogRequestError (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+        at ei.request (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+        at a (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+        at async Promise.all (index 0)
+        at QueryBuilder.findManyWithPagination (D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:153:40)
+        at VisitServiceDAO.findAll (D:\Unit-test-SQA\Do_An_Backend-develop\src\daos\visit-service.dao.ts:147:16)
+        at VisitServiceService.listServiceUsages (D:\Unit-test-SQA\Do_An_Backend-develop\src\services\visit-service.service.ts:118:16)
+        at D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:640:29
+        at D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:41:23
+        at Proxy._transactionWithCallback (D:\Unit-test-SQA\Do_An_Backend-develop\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:722:18)
+        at runTest (D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:32:13)
+        at Object.<anonymous> (D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service.test.ts:639:13) {
+      clientVersion: '6.16.3'
+    }
+
+    [0m [90m 411 |[39m
+     [90m 412 |[39m     [36mprivate[39m handleError(error[33m:[39m any[33m,[39m operation[33m:[39m string)[33m:[39m never {
+    [31m[1m>[22m[39m[90m 413 |[39m         console[33m.[39merror(
+     [90m     |[39m                 [31m[1m^[22m[39m
+     [90m 414 |[39m             [32m`QueryBuilder Error [${String(this.model)}.${operation}]:`[39m[33m,[39m
+     [90m 415 |[39m             error
+     [90m 416 |[39m         )[33m;[39m[0m
+
+      at QueryBuilder.handleError (src/helpers/queryBuilder.ts:413:17)
+      at QueryBuilder.findManyWithPagination (src/helpers/queryBuilder.ts:180:18)
+      at VisitServiceDAO.findAll (src/daos/visit-service.dao.ts:147:16)
+      at VisitServiceService.listServiceUsages (src/services/visit-service.service.ts:118:16)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:640:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:639:13)
+
+FAIL src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts
+  Unit Test Service - Visit Management (Century Suite 100 Explicit Cases)
+    NhĂ³m 1: Quáº£n lĂ½ LÆ°á»£t khĂ¡m
+      Ă— TC_BS_QLK_S_01: [BVA] Cháº·n ngĂ y tĂ¡i khĂ¡m quĂ¡ khá»© (Nghiá»‡p vá»¥: FAIL) (15 ms)
+      âˆ TC_BS_QLK_S_02: [BVA] Cáº­p nháº­t ngĂ y tĂ¡i khĂ¡m lĂ  HĂ´m nay (10 ms)
+      âˆ TC_BS_QLK_S_03: [BVA] Cáº­p nháº­t ngĂ y tĂ¡i khĂ¡m lĂ  TÆ°Æ¡ng lai (4 ms)
+      âˆ TC_BS_QLK_S_04: [EP] Táº¡o lÆ°á»£t khĂ¡m: Bá»‡nh nhĂ¢n khĂ´ng cĂ³ EHR (Lá»—i 404) (155 ms)
+      âˆ TC_BS_QLK_S_05: [EP] Táº¡o lÆ°á»£t khĂ¡m: BĂ¡c sÄ© khĂ´ng tá»“n táº¡i (Lá»—i 404) (10 ms)
+      Ă— TC_BS_QLK_S_06: [EP] HoĂ n táº¥t lÆ°á»£t khĂ¡m: Tráº¡ng thĂ¡i Ä‘ang "waiting" (Pháº£i qua in_progress) (31 ms)
+      âˆ TC_BS_QLK_S_07: [EP] HoĂ n táº¥t lÆ°á»£t khĂ¡m: BĂ¡c sÄ© khĂ¡c thá»±c hiá»‡n (Lá»—i phĂ¢n quyá»n) (8 ms)
+      âˆ TC_BS_QLK_S_08: [EP] Há»§y lÆ°á»£t khĂ¡m: Tráº¡ng thĂ¡i Ä‘Ă£ "completed" (KhĂ´ng Ä‘Æ°á»£c há»§y) (8 ms)
+      âˆ TC_BS_QLK_S_09: [EP] Há»§y lÆ°á»£t khĂ¡m: Tráº¡ng thĂ¡i Ä‘Ă£ "cancelled" (Lá»—i trĂ¹ng láº·p) (9 ms)
+      Ă— TC_BS_QLK_S_10: [BVA] Há»§y lÆ°á»£t khĂ¡m: LĂ½ do trá»‘ng (Báº¯t buá»™c lĂ½ do) (11 ms)
+      âˆ TC_BS_QLK_S_11: [EP] TĂ¬m kiáº¿m lÆ°á»£t khĂ¡m: Lá»c theo tráº¡ng thĂ¡i "in_progress" (174 ms)
+      Ă— TC_BS_QLK_S_12: [EP] TĂ¬m kiáº¿m lÆ°á»£t khĂ¡m: PhĂ¢n trang (Trang 2) (6 ms)
+      Ă— TC_BS_QLK_S_13: [BVA] TĂ¬m kiáº¿m lÆ°á»£t khĂ¡m: Limit vÆ°á»£t má»©c tá»‘i Ä‘a (Máº·c Ä‘á»‹nh vá» limit max) 
+(5 ms)
+      âˆ TC_BS_QLK_S_14: [EP] Láº¥y tĂ³m táº¯t lÆ°á»£t khĂ¡m: Admin truy cáº­p (10 ms)
+      âˆ TC_BS_QLK_S_15: [EP] Láº¥y chi tiáº¿t lÆ°á»£t khĂ¡m: Bá»‡nh nhĂ¢n khĂ¡c xem (Lá»—i phĂ¢n quyá»n) (12 ms)
+      âˆ TC_BS_QLK_S_16: [BVA] Thá»‘ng kĂª lÆ°á»£t khĂ¡m: Khoáº£ng thá»i gian tá»« ngĂy > Ä‘áº¿n ngĂy (Lá»—i logic) 
+(13 ms)
+      Ă— TC_BS_QLK_S_17: [EP] Láº¥y nhiá»‡m vá»¥ bĂ¡c sÄ©: BĂ¡c sÄ© khĂ´ng cĂ³ nhiá»‡m vá»¥ nĂ o (163 ms)
+      âˆ TC_BS_QLK_S_18: [EP] Cáº­p nháº­t tráº¡ng thĂ¡i lÆ°á»£t khĂ¡m: Tá»« waiting sang in_progress (13 ms)
+      âˆ TC_BS_QLK_S_19: [EP] Láº¥y danh sĂ¡ch lÆ°á»£t khĂ¡m cá»§a bĂ¡c sÄ©: Lá»c theo ngĂ y hĂ´m nay (196 ms)
+      Ă— TC_BS_QLK_S_20: [EP] Láº¥y lá»‹ch sá»­ khĂ¡m bá»‡nh nhĂ¢n: Quyá»n Staff xem (1 ms)
+      âˆ TC_BS_QLK_S_21: [EP] Táº¡o lÆ°á»£t khĂ¡m: KĂ¨m dá»‹ch vá»¥ y táº¿ chá»‰ Ä‘á»‹nh (12 ms)
+      âˆ TC_BS_QLK_S_22: [EP] Táº¡o lÆ°á»£t khĂ¡m: KĂ¨m lá»‹ch háº¹n (Appointment link) (10 ms)
+      âˆ TC_BS_QLK_S_23: [EP] TĂ³m táº¯t chi phĂ­: Khi chÆ°a cĂ³ thuá»‘c vĂ  dá»‹ch vá»¥ (Total = 0) (10 ms)
+      âˆ TC_BS_QLK_S_24: [EP] Láº¥y danh sĂ¡ch lÆ°á»£t khĂ¡m: Theo ngĂ y cá»¥ thá»ƒ (268 ms)
+      âˆ TC_BS_QLK_S_25: [EP] Cáº­p nháº­t lÆ°á»£t khĂ¡m: Thay Ä‘á»•i bĂ¡c sÄ© phá»¥ trĂ¡ch (15 ms)
+    NhĂ³m 2: Há»“ sÆ¡ bá»‡nh Ă¡n & Táº£i file
+      Ă— TC26: [EP] Táº¡o há»“ sÆ¡: Triá»‡u chá»©ng rá»—ng (Báº¯t buá»™c nháº­p) (14 ms)
+      Ă— TC27: [EP] Táº¡o há»“ sÆ¡: Cháº©n Ä‘oĂ¡n rá»—ng (Báº¯t buá»™c nháº­p) (11 ms)
+      âˆ TC28: [EP] Upload file: Äá»‹nh dáº¡ng .JPG (Há»£p lá»‡) (12 ms)
+      âˆ TC29: [EP] Upload file: Äá»‹nh dáº¡ng .PNG (Há»£p lá»‡) (11 ms)
+      âˆ TC30: [EP] Upload file: Äá»‹nh dáº¡ng .PDF (Há»£p lá»‡) (11 ms)
+      âˆ TC31: [EP] Upload file: Äá»‹nh dáº¡ng .EXE (KhĂ´ng há»£p lá»‡) (9 ms)
+      âˆ TC32: [BVA] Upload file: Dung lÆ°á»£ng 0 bytes (KhĂ´ng há»£p lá»‡) (11 ms)
+      âˆ TC33: [BVA] Upload file: VÆ°á»£t dung lÆ°á»£ng 10MB (KhĂ´ng há»£p lá»‡) (7 ms)
+      Ă— TC34: [EP] XĂ³a há»“ sÆ¡: BĂ¡c sÄ© khĂ¡c xĂ³a (Lá»—i phĂ¢n quyá»n) (15 ms)
+      âˆ TC35: [EP] Xem há»“ sÆ¡: Bá»‡nh nhĂ¢n khĂ¡c xem (Lá»—i phĂ¢n quyá»n) (13 ms)
+      âˆ TC36: [EP] Cáº­p nháº­t há»“ sÆ¡: ThĂ nh cĂ´ng (Direct service call) (18 ms)
+      âˆ TC37: [EP] XĂ³a há»“ sÆ¡: ThĂ nh cĂ´ng bá»Ÿi bĂ¡c sÄ© chá»§ quáº£n (12 ms)
+      âˆ TC38: [EP] Xem danh sĂ¡ch há»“ sÆ¡: Admin xem toĂ n bá»™ (5 ms)
+      âˆ TC39: [EP] Xem danh sĂ¡ch há»“ sÆ¡: BĂ¡c sÄ© xem cá»§a mĂ¬nh (6 ms)
+      âˆ TC40: [EP] Táº¡o há»“ sÆ¡: KĂ¨m nhiá»u file Ä‘Ă­nh kĂ¨m cĂ¹ng lĂºc (13 ms)
+      âˆ TC41: [EP] XĂ³a tá»‡p Ä‘Ă­nh kĂ¨m: ThĂ nh cĂ´ng (14 ms)
+      âˆ TC42: [EP] XĂ³a tá»‡p Ä‘Ă­nh kĂ¨m: File khĂ´ng tá»“n táº¡i (Lá»—i 404) (2 ms)
+      Ă— TC43: [EP] Cáº­p nháº­t há»“ sÆ¡: ÄĂ­nh kĂ¨m thĂªm file má»›i (8 ms)
+      âˆ TC44: [EP] Cháº·n táº¡o há»“ sÆ¡ cho lÆ°á»£t khĂ¡m Ä‘Ă£ "completed" (Nghiá»‡p vá»¥: FAIL) (3 ms)
+      âˆ TC45: [EP] Cháº·n táº¡o há»“ sÆ¡ cho lÆ°á»£t khĂ¡m Ä‘Ă£ "cancelled" (Nghiá»‡p vá»¥: FAIL) (3 ms)
+      âˆ TC46: [EP] Cháº·n táº¡o há»“ sÆ¡: BĂ¡c sÄ© khĂ´ng Ä‘Æ°á»£c giao (Nghiá»‡p vá»¥: FAIL) (7 ms)
+      Ă— TC47: [EP] XĂ³a há»“ sÆ¡: KĂ¨m xĂ³a file trĂªn Cloudinary (8 ms)
+      Ă— TC48: [EP] Cáº­p nháº­t há»“ sÆ¡: LÆ°á»£t khĂ¡m "completed" (Nghiá»‡p vá»¥: FAIL) (8 ms)
+      Ă— TC49: [EP] Xem há»“ sÆ¡: Quyá»n bĂ¡c sÄ© chá»§ quáº£n (8 ms)
+      Ă— TC50: [EP] XĂ³a tá»‡p Ä‘Ă­nh kĂ¨m: BĂ¡c sÄ© chá»§ quáº£n (9 ms)
+    NhĂ³m 3: Dá»‹ch vá»¥ chá»‰ Ä‘á»‹nh (Direct service validation)
+      Ă— TC51: [BVA] createServiceUsage: Sá»‘ lÆ°á»£ng = 0 (Tháº¥t báº¡i) (19 ms)
+      âˆ TC52: [EP] createServiceUsage: Visit khĂ´ng tá»“n táº¡i (Lá»—i 404) (5 ms)
+      âˆ TC53: [EP] getServiceUsageById: Quyá»n Bá»‡nh nhĂ¢n truy cáº­p cá»§a mĂ¬nh (17 ms)
+      âˆ TC54: [EP] getServiceUsageById: Cháº·n Bá»‡nh nhĂ¢n xem cá»§a ngÆ°á»i khĂ¡c (Lá»—i 403) (15 ms)
+      Ă— TC55: [EP] listServiceUsages: Bá»‡nh nhĂ¢n chá»‰ tháº¥y cá»§a mĂ¬nh (97 ms)
+      âˆ TC56: [EP] updateServiceUsage: Cháº·n cáº­p nháº­t khi tráº¡ng thĂ¡i lĂ  "done" (Lá»—i 400) (20 ms)
+      âˆ TC57: [EP] deleteServiceUsage: Cháº·n xĂ³a khi tráº¡ng thĂ¡i khĂ´ng pháº£i "ordered" (Lá»—i 400) (17 ms)
+      Ă— TC58: [EP] getVisitHistory: Quyá»n BĂ¡c sÄ© xem lá»‹ch sá»­ lÆ°á»£t khĂ¡m (12 ms)
+      âˆ TC59: [EP] bulkCreateServiceUsages: ThĂ nh cĂ´ng toĂ n bá»™ & Gá»™p thuá»‘c trĂ¹ng (17 ms)
+      âˆ TC60: [EP] bulkCreateServiceUsages: Tháº¥t báº¡i toĂ n bá»™ (Lá»—i 400) (2 ms)
+      âˆ TC61: [EP] bulkCreateServiceUsages: Há»—n há»£p ThĂ nh cĂ´ng & Tháº¥t báº¡i (14 ms)
+      âˆ TC62: [EP] createServiceUsage: Medical Service khĂ´ng tá»“n táº¡i (Lá»—i 404) (9 ms)
+      âˆ TC63: [EP] getServiceUsageById: Dá»‹ch vá»¥ khĂ´ng tá»“n táº¡i (Lá»—i 404) (2 ms)
+      âˆ TC64: [EP] deleteServiceUsage: ThĂ nh cĂ´ng (ordered status) (18 ms)
+      Ă— TC65: [EP] listServiceUsages: Quyá»n Admin xem toĂ n bá»™ (8 ms)
+      âˆ TC66: [EP] updateServiceUsage: ThĂ nh cĂ´ng (ordered status) (21 ms)
+      âˆ TC67: [EP] getVisitHistory: Visit khĂ´ng tá»“n táº¡i (Lá»—i 404) (4 ms)
+      âˆ TC68: [EP] getVisitHistory: Cháº·n Bá»‡nh nhĂ¢n xem lá»‹ch sá»­ cá»§a ngÆ°á»i khĂ¡c (Lá»—i 403) (8 ms)
+      âˆ TC69: [EP] bulkCreateServiceUsages: Bá» qua item null (13 ms)
+      Ă— TC70: [EP] listServiceUsages: Lá»c theo status "done" (7 ms)
+      Ă— TC71: [BVA] listServiceUsages: PhĂ¢n trang trang cuá»‘i (7 ms)
+      âˆ TC72: [EP] updateServiceUsage: Cháº·n cáº­p nháº­t khi tráº¡ng thĂ¡i lĂ  "cancelled" (Lá»—i 400) (17 ms)
+      âˆ TC73: [EP] getServiceUsageById: Quyá»n Staff xem (14 ms)
+      âˆ TC74: [EP] bulkCreateServiceUsages: Lá»—i nĂ©m ra tá»« DAO (Error handling) (12 ms)
+      âˆ TC75: [EP] createServiceUsage: Ghi nháº­n thá»i gian chá»‰ Ä‘á»‹nh (orderedAt) (12 ms)
+    NhĂ³m 4: ÄÆ¡n thuá»‘c & TĂ­nh toĂ¡n chi phĂ­
+      âˆ TC_BS_QLK_S_76: [Logic] ThĂªm thuá»‘c trĂ¹ng: Pháº£i gá»™p sá»‘ lÆ°á»£ng vĂo 1 dĂ²ng (Nghiá»‡p vá»¥: FAIL) 
+(20 ms)
+      Ă— TC_BS_QLK_S_77: [BVA] addMedicinesToPrescription: Ghi chĂº rá»—ng (Tháº¥t báº¡i) (17 ms)
+      Ă— TC_BS_QLK_S_78: [Logic] TĂ­nh tiá»n thuá»‘c: GiĂ¡ Ä‘Æ¡n vá»‹ * Sá»‘ lÆ°á»£ng (Nghiá»‡p vá»¥: FAIL) (12 ms)
+      âˆ TC_BS_QLK_S_79: [EP] deletePrescription: Cháº·n xĂ³a khi lÆ°á»£t khĂ¡m Ä‘Ă£ "completed" (Lá»—i 400) (18 ms)
+      âˆ TC_BS_QLK_S_80: [EP] updateMedicineUsage: Cháº·n bĂ¡c sÄ© khĂ´ng pháº£i chá»§ quáº£n (Lá»—i 403) (18 ms)
+      âˆ TC_BS_QLK_S_81: [EP] updatePrescriptionWithMedicines: Thay tháº¿ toĂ n bá»™ thuá»‘c (22 ms)
+      âˆ TC_BS_QLK_S_82: [EP] getPrescriptionById: Quyá»n Bá»‡nh nhĂ¢n truy cáº­p (14 ms)
+      âˆ TC_BS_QLK_S_83: [EP] getPrescriptionsByVisitId: ThĂ nh cĂ´ng (14 ms)
+      âˆ TC_BS_QLK_S_84: [EP] getPrescriptionsList: Lá»c theo "paid" status (5 ms)
+      âˆ TC_BS_QLK_S_85: [EP] getMedicineUsagesByPrescriptionId: ThĂ nh cĂ´ng (14 ms)
+      âˆ TC_BS_QLK_S_86: [EP] createMedicineUsage: ÄÆ¡n thuá»‘c khĂ´ng tá»“n táº¡i (Lá»—i 404) (2 ms)
+      âˆ TC_BS_QLK_S_87: [EP] updateMedicineUsage: ThĂ nh cĂ´ng (BĂ¡c sÄ© chá»§ quáº£n) (19 ms)
+      Ă— TC_BS_QLK_S_88: [EP] deleteMedicineUsage: ThĂ nh cĂ´ng (BĂ¡c sÄ© chá»§ quáº£n) (18 ms)
+      âˆ TC_BS_QLK_S_89: [EP] togglePurchaseMedicines: Äá»•i tráº¡ng thĂ¡i mua thuá»‘c (12 ms)
+      âˆ TC_BS_QLK_S_90: [EP] validateVisitForPrescription: Cháº·n bĂ¡c sÄ© khĂ´ng Ä‘Æ°á»£c giao (Lá»—i 403) (7 ms)
+      Ă— TC_BS_QLK_S_91: [EP] updatePrescription: Sá»­a ghi chĂº Ä‘Æ¡n thuá»‘c (17 ms)
+      âˆ TC_BS_QLK_S_92: [EP] getPrescriptionById: KhĂ´ng tĂ¬m tháº¥y (Lá»—i 404) (3 ms)
+      âˆ TC_BS_QLK_S_93: [EP] deleteMedicineUsage: Cháº·n bĂ¡c sÄ© khĂ¡c xĂ³a (Lá»—i 403) (16 ms)
+      âˆ TC_BS_QLK_S_94: [EP] createPrescription: Visit Ä‘Ă£ bá»‹ há»§y (Lá»—i 400) (3 ms)
+      âˆ TC_BS_QLK_S_95: [EP] getPrescriptionsList: Lá»c theo khoáº£ng ngĂ y (fromDate/toDate) (3 ms)
+      âˆ TC_BS_QLK_S_96: [EP] updateMedicineUsage: Medicine usage khĂ´ng tá»“n táº¡i (Lá»—i 404) (3 ms)
+      âˆ TC_BS_QLK_S_97: [EP] getVisitSummary: Bao gá»“m Ä‘áº§y Ä‘á»§ Breakdown chi phĂ­ (8 ms)
+      Ă— TC_BS_QLK_S_98: [EP] calculateVisiTC_BS_QLK_S_ost: Khi cĂ³ nhiá»u dá»‹ch vá»¥ vĂ  thuá»‘c há»—n há»£p (19 ms)
+      Ă— TC_BS_QLK_S_99: [EP] getPrescriptionById: Quyá»n Staff truy cáº­p (12 ms)
+      Ă— TC_BS_QLK_S_100: [Logic] HoĂn táº¥t lÆ°á»£t khĂ¡m: Äá»“ng bá»™ tráº¡ng thĂ¡i Appointment (Transaction 
+coverage) (4 ms)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 1: Quáº£n lĂ½ LÆ°á»£t khĂ¡m 
+â€º TC_BS_QLK_S_01: [BVA] Cháº·n ngĂy tĂ¡i khĂ¡m quĂ¡ khá»© (Nghiá»‡p vá»¥: FAIL)
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: {"appointmentId": null, "createdAt": 2026-05-09T06:44:48.071Z, "doctorId": 
+"1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "ehrId": "95af0451-51e5-48a2-9271-abd3adf07624", "endTime": null, "id": 
+"ad2168c3-ffee-4ab9-af6c-1bf03db03906", "medicalServiceId": null, "nextVisitDate": 2000-01-01T00:00:00.000Z, 
+"patientUserId": "06f472db-0bfd-4a08-b23f-e44f2bc14330", "startTime": null, "status": "in_progress", "type": "new", 
+"updatedAt": 2026-05-09T06:44:48.076Z}
+
+    [0m [90m 55 |[39m             [36mawait[39m runTest([36masync[39m () [33m=>[39m {
+     [90m 56 |[39m                 [36mconst[39m v [33m=[39m [36mawait[39m 
+prisma[33m.[39mvisit[33m.[39mcreate({ data[33m:[39m { ehrId[33m,[39m doctorId[33m,[39m status[33m:[39m 
+[32m'in_progress'[39m[33m,[39m patientUserId } } [36mas[39m any)[33m;[39m
+    [31m[1m>[22m[39m[90m 57 |[39m                 [36mawait[39m 
+expect(visitService[33m.[39mupdateNextVisitDate(v[33m.[39mid[33m,[39m 
+[32m'2000-01-01T00:00:00Z'[39m))[33m.[39mrejects[33m.[39mtoThrow()[33m;[39m
+     [90m    |[39m                       [31m[1m^[22m[39m
+     [90m 58 |[39m             })[33m;[39m
+     [90m 59 |[39m         })[33m;[39m
+     [90m 60 |[39m[0m
+
+      at expect (node_modules/expect/build/index.js:2116:15)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:57:23
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:55:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 1: Quáº£n lĂ½ LÆ°á»£t khĂ¡m 
+â€º TC_BS_QLK_S_06: [EP] HoĂn táº¥t lÆ°á»£t khĂ¡m: Tráº¡ng thĂ¡i Ä‘ang "waiting" (Pháº£i qua in_progress)
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: {"appointmentId": null, "createdAt": 2026-05-09T06:44:48.372Z, "doctor": {"experienceYears": 
+10, "level": "BSÄK", "licenseNumber": "MD-123456", "specialization": "KhĂ¡m máº¯t", "userId": 
+"1a9a6186-1036-44ae-bf1e-0db7304f9b8c"}, "doctorId": "1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "ehrId": 
+"95af0451-51e5-48a2-9271-abd3adf07624", "endTime": 2026-05-09T06:44:48.391Z, "id": 
+"9edf13d4-23d3-49f8-b227-edab28fac185", "medicalServiceId": null, "nextVisitDate": null, "patient": {"patientId": 
+"PAT003", "user": {"email": "nguyenminhtuanfullstack2@gmail.com", "id": "06f472db-0bfd-4a08-b23f-e44f2bc14330", 
+"name": {"firstName": "Nguyá»…n Minh", "lastName": "Tuáº¥n", "userId": "06f472db-0bfd-4a08-b23f-e44f2bc14330"}}, 
+"userId": "06f472db-0bfd-4a08-b23f-e44f2bc14330"}, "patientUserId": "06f472db-0bfd-4a08-b23f-e44f2bc14330", 
+"startTime": null, "status": "completed", "type": "new", "updatedAt": 2026-05-09T06:44:48.393Z}
+
+    [0m [90m 92 |[39m             [36mawait[39m runTest([36masync[39m () [33m=>[39m {
+     [90m 93 |[39m                 [36mconst[39m v [33m=[39m [36mawait[39m 
+visitService[33m.[39mcreateVisit({ patientUserId[33m,[39m doctorId[33m,[39m status[33m:[39m 
+[32m'waiting'[39m })[33m;[39m
+    [31m[1m>[22m[39m[90m 94 |[39m                 [36mawait[39m 
+expect(visitService[33m.[39mcompleteVisit(v[33m.[39mid[33m,[39m doctorId[33m,[39m 
+[32m'doctor'[39m))[33m.[39mrejects[33m.[39mtoThrow()[33m;[39m
+     [90m    |[39m                       [31m[1m^[22m[39m
+     [90m 95 |[39m             })[33m;[39m
+     [90m 96 |[39m         })[33m;[39m
+     [90m 97 |[39m[0m
+
+      at expect (node_modules/expect/build/index.js:2116:15)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:94:23
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:92:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 1: Quáº£n lĂ½ LÆ°á»£t khĂ¡m 
+â€º TC_BS_QLK_S_10: [BVA] Há»§y lÆ°á»£t khĂ¡m: LĂ½ do trá»‘ng (Báº¯t buá»™c lĂ½ do)
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: {"appointmentId": null, "createdAt": 2026-05-09T06:44:48.427Z, "doctor": {"experienceYears": 
+10, "level": "BSÄK", "licenseNumber": "MD-123456", "specialization": "KhĂ¡m máº¯t", "userId": 
+"1a9a6186-1036-44ae-bf1e-0db7304f9b8c"}, "doctorId": "1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "ehrId": 
+"95af0451-51e5-48a2-9271-abd3adf07624", "endTime": null, "id": "59793b6e-7c24-4ab7-a857-2a785cd545dd", 
+"medicalServiceId": null, "nextVisitDate": null, "patient": {"patientId": "PAT003", "user": {"email": 
+"nguyenminhtuanfullstack2@gmail.com", "id": "06f472db-0bfd-4a08-b23f-e44f2bc14330", "name": {"firstName": "Nguyá»…n 
+Minh", "lastName": "Tuáº¥n", "userId": "06f472db-0bfd-4a08-b23f-e44f2bc14330"}}, "userId": 
+"06f472db-0bfd-4a08-b23f-e44f2bc14330"}, "patientUserId": "06f472db-0bfd-4a08-b23f-e44f2bc14330", "startTime": null, 
+"status": "cancelled", "type": "new", "updatedAt": 2026-05-09T06:44:48.432Z}
+
+    [0m [90m 120 |[39m             [36mawait[39m runTest([36masync[39m () [33m=>[39m {
+     [90m 121 |[39m                 [36mconst[39m v [33m=[39m [36mawait[39m 
+visitService[33m.[39mcreateVisit({ patientUserId[33m,[39m doctorId })[33m;[39m
+    [31m[1m>[22m[39m[90m 122 |[39m                 [36mawait[39m 
+expect(visitService[33m.[39mcancelVisit(v[33m.[39mid[33m,[39m doctorId[33m,[39m [32m'doctor'[39m[33m,[39m 
+{ reason[33m:[39m [32m''[39m }))[33m.[39mrejects[33m.[39mtoThrow()[33m;[39m
+     [90m     |[39m                       [31m[1m^[22m[39m
+     [90m 123 |[39m             })[33m;[39m
+     [90m 124 |[39m         })[33m;[39m
+     [90m 125 |[39m[0m
+
+      at expect (node_modules/expect/build/index.js:2116:15)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:122:23
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:120:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 1: Quáº£n lĂ½ LÆ°á»£t khĂ¡m 
+â€º TC_BS_QLK_S_12: [EP] TĂ¬m kiáº¿m lÆ°á»£t khĂ¡m: PhĂ¢n trang (Trang 2)
+
+    TypeError: Cannot read properties of undefined (reading 'currentPage')
+
+    [0m [90m 134 |[39m             [36mawait[39m runTest([36masync[39m () [33m=>[39m {
+     [90m 135 |[39m                 [36mconst[39m res [33m=[39m [36mawait[39m 
+visitService[33m.[39msearchVisits(patientUserId[33m,[39m { page[33m:[39m [32m'2'[39m[33m,[39m 
+limit[33m:[39m [32m'5'[39m })[33m;[39m
+    [31m[1m>[22m[39m[90m 136 |[39m                 
+expect(res[33m.[39mpagination[33m.[39mcurrentPage)[33m.[39mtoBe([35m2[39m)[33m;[39m
+     [90m     |[39m                                       [31m[1m^[22m[39m
+     [90m 137 |[39m             })[33m;[39m
+     [90m 138 |[39m         })[33m;[39m
+     [90m 139 |[39m[0m
+
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:136:39
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:134:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 1: Quáº£n lĂ½ LÆ°á»£t khĂ¡m 
+â€º TC_BS_QLK_S_13: [BVA] TĂ¬m kiáº¿m lÆ°á»£t khĂ¡m: Limit vÆ°á»£t má»©c tá»‘i Ä‘a (Máº·c Ä‘á»‹nh vá» limit max)
+
+    TypeError: Cannot read properties of undefined (reading 'limit')
+
+    [0m [90m 141 |[39m             [36mawait[39m runTest([36masync[39m () [33m=>[39m {
+     [90m 142 |[39m                 [36mconst[39m res [33m=[39m [36mawait[39m 
+visitService[33m.[39msearchVisits(patientUserId[33m,[39m { limit[33m:[39m [32m'9999'[39m })[33m;[39m
+    [31m[1m>[22m[39m[90m 143 |[39m                 expect([33mNumber[39m(res[33m.[39mpagination[33m.[39mlim
+it))[33m.[39mtoBeLessThanOrEqual([35m100[39m)[33m;[39m
+     [90m     |[39m                                              [31m[1m^[22m[39m
+     [90m 144 |[39m             })[33m;[39m
+     [90m 145 |[39m         })[33m;[39m
+     [90m 146 |[39m[0m
+
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:143:46
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:141:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 1: Quáº£n lĂ½ LÆ°á»£t khĂ¡m 
+â€º TC_BS_QLK_S_17: [EP] Láº¥y nhiá»‡m vá»¥ bĂ¡c sÄ©: BĂ¡c sÄ© khĂ´ng cĂ³ nhiá»‡m vá»¥ nĂo
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 2
+
+    [0m [90m 169 |[39m             [36mawait[39m runTest([36masync[39m () [33m=>[39m {
+     [90m 170 |[39m                 [36mconst[39m res [33m=[39m [36mawait[39m 
+visitService[33m.[39mgetTasksOfDoctor(otherDoctorId[33m,[39m {})[33m;[39m
+    [31m[1m>[22m[39m[90m 171 |[39m                 
+expect(res[33m.[39mdata[33m.[39mlength)[33m.[39mtoBe([35m0[39m)[33m;[39m
+     [90m     |[39m                                         [31m[1m^[22m[39m
+     [90m 172 |[39m             })[33m;[39m
+     [90m 173 |[39m         })[33m;[39m
+     [90m 174 |[39m[0m
+
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:171:41
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:169:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 1: Quáº£n lĂ½ LÆ°á»£t khĂ¡m 
+â€º TC_BS_QLK_S_20: [EP] Láº¥y lá»‹ch sá» khĂ¡m bá»‡nh nhĂ¢n: Quyá»n Staff xem
+
+    TypeError: visit_service_1.default.getVisitHistoryOfPatient is not a function
+
+    [0m [90m 191 |[39m         it([32m'TC_BS_QLK_S_20: [EP] Láº¥y lá»‹ch sá» khĂ¡m bá»‡nh nhĂ¢n: Quyá»n Staff 
+xem'[39m[33m,[39m [36masync[39m () [33m=>[39m {
+     [90m 192 |[39m             [36mawait[39m runTest([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 193 |[39m                 [36mconst[39m res [33m=[39m [36mawait[39m 
+visitService[33m.[39mgetVisitHistoryOfPatient(patientUserId[33m,[39m [32m'staff-1'[39m[33m,[39m 
+[32m'staff'[39m)[33m;[39m
+     [90m     |[39m                                                [31m[1m^[22m[39m
+     [90m 194 |[39m                 expect(res)[33m.[39mtoBeDefined()[33m;[39m
+     [90m 195 |[39m             })[33m;[39m
+     [90m 196 |[39m         })[33m;[39m[0m
+
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:193:48
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:29
+      at Proxy.callback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:24)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:192:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 2: Há»“ sÆ¡ bá»‡nh Ă¡n & Táº£i 
+file â€º TC26: [EP] Táº¡o há»“ sÆ¡: Triá»‡u chá»©ng rá»—ng (Báº¯t buá»™c nháºp)
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: {"createdAt": 2026-05-09T06:44:49.357Z, "diagnosis": "CĂºm", "doctor": {"experienceYears": 10, 
+"level": "BSÄK", "licenseNumber": "MD-123456", "specialization": "KhĂ¡m máº¯t", "staff": {"departmentId": 1, 
+"joinTime": 2010-01-01T00:00:00.000Z, "leaveTime": null, "position": "BĂ¡c sÄ©", "staffId": "DOC002", "user": 
+{"email": "hoangvantrung@gmail.com", "id": "1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "name": {"firstName": "Nguyá»…n", 
+"lastName": "Minh Tuáº¥n", "userId": "1a9a6186-1036-44ae-bf1e-0db7304f9b8c"}, "username": "hoangvantrung1"}, "userId": 
+"1a9a6186-1036-44ae-bf1e-0db7304f9b8c"}, "userId": "1a9a6186-1036-44ae-bf1e-0db7304f9b8c"}, "doctorId": 
+"1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "fileAssets": [], "id": "892e2847-8a56-42cc-b90f-4a52eade9a88", "isParent": 
+false, "notes": null, "symptoms": "", "title": "KhĂ¡m", "treatments": "Nghá»‰", "updatedAt": 2026-05-09T06:44:49.357Z, 
+"visit": {"appointmentId": null, "createdAt": 2026-05-09T06:44:49.351Z, "doctorId": 
+"1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "ehrId": "95af0451-51e5-48a2-9271-abd3adf07624", "endTime": null, "id": 
+"1e668c99-c054-4e7d-87c0-d9ea01244a86", "medicalServiceId": null, "nextVisitDate": null, "patient": {"patientId": 
+"PAT003", "user": {"email": "nguyenminhtuanfullstack2@gmail.com", "id": "06f472db-0bfd-4a08-b23f-e44f2bc14330", 
+"name": {"firstName": "Nguyá»…n Minh", "lastName": "Tuáº¥n", "userId": "06f472db-0bfd-4a08-b23f-e44f2bc14330"}, 
+"username": "minhtuan"}, "userId": "06f472db-0bfd-4a08-b23f-e44f2bc14330"}, "patientUserId": 
+"06f472db-0bfd-4a08-b23f-e44f2bc14330", "startTime": null, "status": "in_progress", "type": "new", "updatedAt": 
+2026-05-09T06:44:49.351Z}, "visitId": "1e668c99-c054-4e7d-87c0-d9ea01244a86"}
+
+    [0m [90m 245 |[39m             [36mawait[39m runTest([36masync[39m () [33m=>[39m {
+     [90m 246 |[39m                 [36mconst[39m v [33m=[39m [36mawait[39m 
+visitService[33m.[39mcreateVisit({ patientUserId[33m,[39m doctorId })[33m;[39m
+    [31m[1m>[22m[39m[90m 247 |[39m                 [36mawait[39m 
+expect(medicalRecordService[33m.[39mcreateMedicalRecord(doctorId[33m,[39m { visitId[33m:[39m 
+v[33m.[39mid[33m,[39m title[33m:[39m [32m'KhĂ¡m'[39m[33m,[39m symptoms[33m:[39m [32m''[39m[33m,[39m 
+diagnosis[33m:[39m [32m'CĂºm'[39m[33m,[39m treatments[33m:[39m [32m'Nghá»‰'[39m 
+}))[33m.[39mrejects[33m.[39mtoThrow()[33m;[39m
+     [90m     |[39m                       [31m[1m^[22m[39m
+     [90m 248 |[39m             })[33m;[39m
+     [90m 249 |[39m         })[33m;[39m
+     [90m 250 |[39m[0m
+
+      at expect (node_modules/expect/build/index.js:2116:15)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:247:23
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:245:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 2: Há»“ sÆ¡ bá»‡nh Ă¡n & Táº£i 
+file â€º TC27: [EP] Táº¡o há»“ sÆ¡: Cháº©n Ä‘oĂ¡n rá»—ng (Báº¯t buá»™c nháºp)
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: {"createdAt": 2026-05-09T06:44:49.369Z, "diagnosis": "", "doctor": {"experienceYears": 10, 
+"level": "BSÄK", "licenseNumber": "MD-123456", "specialization": "KhĂ¡m máº¯t", "staff": {"departmentId": 1, 
+"joinTime": 2010-01-01T00:00:00.000Z, "leaveTime": null, "position": "BĂ¡c sÄ©", "staffId": "DOC002", "user": 
+{"email": "hoangvantrung@gmail.com", "id": "1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "name": {"firstName": "Nguyá»…n", 
+"lastName": "Minh Tuáº¥n", "userId": "1a9a6186-1036-44ae-bf1e-0db7304f9b8c"}, "username": "hoangvantrung1"}, "userId": 
+"1a9a6186-1036-44ae-bf1e-0db7304f9b8c"}, "userId": "1a9a6186-1036-44ae-bf1e-0db7304f9b8c"}, "doctorId": 
+"1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "fileAssets": [], "id": "1abd7b11-e062-417a-87b7-70d438006746", "isParent": 
+false, "notes": null, "symptoms": "Sá»‘t", "title": "KhĂ¡m", "treatments": "Nghá»‰", "updatedAt": 
+2026-05-09T06:44:49.369Z, "visit": {"appointmentId": null, "createdAt": 2026-05-09T06:44:49.365Z, "doctorId": 
+"1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "ehrId": "95af0451-51e5-48a2-9271-abd3adf07624", "endTime": null, "id": 
+"7edfaaba-4679-43b0-822e-8c6faa8b7872", "medicalServiceId": null, "nextVisitDate": null, "patient": {"patientId": 
+"PAT003", "user": {"email": "nguyenminhtuanfullstack2@gmail.com", "id": "06f472db-0bfd-4a08-b23f-e44f2bc14330", 
+"name": {"firstName": "Nguyá»…n Minh", "lastName": "Tuáº¥n", "userId": "06f472db-0bfd-4a08-b23f-e44f2bc14330"}, 
+"username": "minhtuan"}, "userId": "06f472db-0bfd-4a08-b23f-e44f2bc14330"}, "patientUserId": 
+"06f472db-0bfd-4a08-b23f-e44f2bc14330", "startTime": null, "status": "in_progress", "type": "new", "updatedAt": 
+2026-05-09T06:44:49.365Z}, "visitId": "7edfaaba-4679-43b0-822e-8c6faa8b7872"}
+
+    [0m [90m 252 |[39m             [36mawait[39m runTest([36masync[39m () [33m=>[39m {
+     [90m 253 |[39m                 [36mconst[39m v [33m=[39m [36mawait[39m 
+visitService[33m.[39mcreateVisit({ patientUserId[33m,[39m doctorId })[33m;[39m
+    [31m[1m>[22m[39m[90m 254 |[39m                 [36mawait[39m 
+expect(medicalRecordService[33m.[39mcreateMedicalRecord(doctorId[33m,[39m { visitId[33m:[39m 
+v[33m.[39mid[33m,[39m title[33m:[39m [32m'KhĂ¡m'[39m[33m,[39m symptoms[33m:[39m 
+[32m'Sá»‘t'[39m[33m,[39m diagnosis[33m:[39m [32m''[39m[33m,[39m treatments[33m:[39m [32m'Nghá»‰'[39m 
+}))[33m.[39mrejects[33m.[39mtoThrow()[33m;[39m
+     [90m     |[39m                       [31m[1m^[22m[39m
+     [90m 255 |[39m             })[33m;[39m
+     [90m 256 |[39m         })[33m;[39m
+     [90m 257 |[39m[0m
+
+      at expect (node_modules/expect/build/index.js:2116:15)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:254:23
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:252:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 2: Há»“ sÆ¡ bá»‡nh Ă¡n & Táº£i 
+file â€º TC34: [EP] XĂ³a há»“ sÆ¡: BĂ¡c sÄ© khĂ¡c xĂ³a (Lá»—i phĂ¢n quyá»n)
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: {"message": "Medical record deleted successfully", "success": true}
+
+    [0m [90m 311 |[39m                 [36mconst[39m v [33m=[39m [36mawait[39m 
+visitService[33m.[39mcreateVisit({ patientUserId[33m,[39m doctorId })[33m;[39m
+     [90m 312 |[39m                 [36mconst[39m rec [33m=[39m [36mawait[39m 
+medicalRecordService[33m.[39mcreateMedicalRecord(doctorId[33m,[39m { visitId[33m:[39m v[33m.[39mid[33m,[39m 
+title[33m:[39m [32m'XĂ³a'[39m[33m,[39m symptoms[33m:[39m [32m'Sá»‘t'[39m[33m,[39m diagnosis[33m:[39m 
+[32m'CĂºm'[39m[33m,[39m treatments[33m:[39m [32m'Nghá»‰'[39m })[33m;[39m
+    [31m[1m>[22m[39m[90m 313 |[39m                 [36mawait[39m 
+expect(medicalRecordService[33m.[39mdeleteMedicalRecord(rec[33m.[39mid[33m,[39m 
+otherDoctorId))[33m.[39mrejects[33m.[39mtoThrow()[33m;[39m
+     [90m     |[39m                       [31m[1m^[22m[39m
+     [90m 314 |[39m             })[33m;[39m
+     [90m 315 |[39m         })[33m;[39m
+     [90m 316 |[39m[0m
+
+      at expect (node_modules/expect/build/index.js:2116:15)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:313:23
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:310:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 2: Há»“ sÆ¡ bá»‡nh Ă¡n & Táº£i 
+file â€º TC43: [EP] Cáºp nháºt há»“ sÆ¡: ÄĂnh kĂ¨m thĂªm file má»›i
+
+    PrismaClientValidationError: 
+    Invalid `prisma.medicalRecord.create()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\daos\medical-record.dao.ts:54:39
+
+      51     doctorId: string,
+      52     data: CreateMedicalRecordDataDto
+      53 ) => {
+    â†’ 54     return await prisma.medicalRecord.create({
+               data: {
+                 doctorId: "1a9a6186-1036-44ae-bf1e-0db7304f9b8c",
+                 visitId: "89afa8f6-0449-4a14-8cee-7abdbbbf13b4",
+                 title: "áº¢nh",
+                 diagnosis: undefined,
+                 treatments: undefined,
+                 notes: null,
+             +   symptoms: String
+               },
+               include: {
+                 doctor: {
+                   include: {
+                     staff: {
+                       include: {
+                         user: {
+                           select: {
+                             id: true,
+                             username: true,
+                             email: true,
+                             name: true
+                           }
+                         }
+                       }
+                     }
+                   }
+                 },
+                 visit: {
+                   include: {
+                     patient: {
+                       include: {
+                         user: {
+                           select: {
+                             id: true,
+                             username: true,
+                             email: true,
+                             name: true
+                           }
+                         }
+                       }
+                     }
+                   }
+                 }
+               }
+             })
+
+    Argument `symptoms` is missing.
+
+    [0m [90m 52 |[39m     data[33m:[39m [33mCreateMedicalRecordDataDto[39m
+     [90m 53 |[39m ) [33m=>[39m {
+    [31m[1m>[22m[39m[90m 54 |[39m     [36mreturn[39m [36mawait[39m 
+prisma[33m.[39mmedicalRecord[33m.[39mcreate({
+     [90m    |[39m            [31m[1m^[22m[39m
+     [90m 55 |[39m         data[33m:[39m {
+     [90m 56 |[39m             doctorId[33m,[39m
+     [90m 57 |[39m             visitId[33m:[39m data[33m.[39mvisitId[33m,[39m[0m
+
+      at Nn (node_modules/@prisma/client/src/runtime/core/errorRendering/throwValidationException.ts:45:9)
+      at ei.throwValidationException [as handleRequestError] 
+(node_modules/@prisma/client/src/runtime/RequestHandler.ts:202:7)
+      at ei.handleAndLogRequestError (node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+      at ei.request (node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+      at a (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+      at createMedicalRecord (src/daos/medical-record.dao.ts:54:12)
+      at Object.createMedicalRecord (src/services/medical-record.service.ts:94:27)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:389:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:387:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 2: Há»“ sÆ¡ bá»‡nh Ă¡n & Táº£i 
+file â€º TC47: [EP] XĂ³a há»“ sÆ¡: KĂ¨m xĂ³a file trĂªn Cloudinary
+
+    PrismaClientValidationError: 
+    Invalid `prisma.medicalRecord.create()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\daos\medical-record.dao.ts:54:39
+
+      51     doctorId: string,
+      52     data: CreateMedicalRecordDataDto
+      53 ) => {
+    â†’ 54     return await prisma.medicalRecord.create({
+               data: {
+                 doctorId: "1a9a6186-1036-44ae-bf1e-0db7304f9b8c",
+                 visitId: "d5d742b6-3c83-42f6-810a-3dbfdae06c7b",
+                 title: "áº¢nh",
+                 diagnosis: undefined,
+                 treatments: undefined,
+                 notes: null,
+             +   symptoms: String
+               },
+               include: {
+                 doctor: {
+                   include: {
+                     staff: {
+                       include: {
+                         user: {
+                           select: {
+                             id: true,
+                             username: true,
+                             email: true,
+                             name: true
+                           }
+                         }
+                       }
+                     }
+                   }
+                 },
+                 visit: {
+                   include: {
+                     patient: {
+                       include: {
+                         user: {
+                           select: {
+                             id: true,
+                             username: true,
+                             email: true,
+                             name: true
+                           }
+                         }
+                       }
+                     }
+                   }
+                 }
+               }
+             })
+
+    Argument `symptoms` is missing.
+
+    [0m [90m 52 |[39m     data[33m:[39m [33mCreateMedicalRecordDataDto[39m
+     [90m 53 |[39m ) [33m=>[39m {
+    [31m[1m>[22m[39m[90m 54 |[39m     [36mreturn[39m [36mawait[39m 
+prisma[33m.[39mmedicalRecord[33m.[39mcreate({
+     [90m    |[39m            [31m[1m^[22m[39m
+     [90m 55 |[39m         data[33m:[39m {
+     [90m 56 |[39m             doctorId[33m,[39m
+     [90m 57 |[39m             visitId[33m:[39m data[33m.[39mvisitId[33m,[39m[0m
+
+      at Nn (node_modules/@prisma/client/src/runtime/core/errorRendering/throwValidationException.ts:45:9)
+      at ei.throwValidationException [as handleRequestError] 
+(node_modules/@prisma/client/src/runtime/RequestHandler.ts:202:7)
+      at ei.handleAndLogRequestError (node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+      at ei.request (node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+      at a (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+      at createMedicalRecord (src/daos/medical-record.dao.ts:54:12)
+      at Object.createMedicalRecord (src/services/medical-record.service.ts:94:27)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:421:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:418:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 2: Há»“ sÆ¡ bá»‡nh Ă¡n & Táº£i 
+file â€º TC48: [EP] Cáºp nháºt há»“ sÆ¡: LÆ°á»£t khĂ¡m "completed" (Nghiá»‡p vá»¥: FAIL)
+
+    PrismaClientValidationError: 
+    Invalid `prisma.medicalRecord.create()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\daos\medical-record.dao.ts:54:39
+
+      51     doctorId: string,
+      52     data: CreateMedicalRecordDataDto
+      53 ) => {
+    â†’ 54     return await prisma.medicalRecord.create({
+               data: {
+                 doctorId: "1a9a6186-1036-44ae-bf1e-0db7304f9b8c",
+                 visitId: "2354fa33-b68a-41d3-b5ff-9d049a990369",
+                 title: "áº¢nh",
+                 diagnosis: undefined,
+                 treatments: undefined,
+                 notes: null,
+             +   symptoms: String
+               },
+               include: {
+                 doctor: {
+                   include: {
+                     staff: {
+                       include: {
+                         user: {
+                           select: {
+                             id: true,
+                             username: true,
+                             email: true,
+                             name: true
+                           }
+                         }
+                       }
+                     }
+                   }
+                 },
+                 visit: {
+                   include: {
+                     patient: {
+                       include: {
+                         user: {
+                           select: {
+                             id: true,
+                             username: true,
+                             email: true,
+                             name: true
+                           }
+                         }
+                       }
+                     }
+                   }
+                 }
+               }
+             })
+
+    Argument `symptoms` is missing.
+
+    [0m [90m 52 |[39m     data[33m:[39m [33mCreateMedicalRecordDataDto[39m
+     [90m 53 |[39m ) [33m=>[39m {
+    [31m[1m>[22m[39m[90m 54 |[39m     [36mreturn[39m [36mawait[39m 
+prisma[33m.[39mmedicalRecord[33m.[39mcreate({
+     [90m    |[39m            [31m[1m^[22m[39m
+     [90m 55 |[39m         data[33m:[39m {
+     [90m 56 |[39m             doctorId[33m,[39m
+     [90m 57 |[39m             visitId[33m:[39m data[33m.[39mvisitId[33m,[39m[0m
+
+      at Nn (node_modules/@prisma/client/src/runtime/core/errorRendering/throwValidationException.ts:45:9)
+      at ei.throwValidationException [as handleRequestError] 
+(node_modules/@prisma/client/src/runtime/RequestHandler.ts:202:7)
+      at ei.handleAndLogRequestError (node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+      at ei.request (node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+      at a (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+      at createMedicalRecord (src/daos/medical-record.dao.ts:54:12)
+      at Object.createMedicalRecord (src/services/medical-record.service.ts:94:27)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:430:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:428:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 2: Há»“ sÆ¡ bá»‡nh Ă¡n & Táº£i 
+file â€º TC49: [EP] Xem há»“ sÆ¡: Quyá»n bĂ¡c sÄ© chá»§ quáº£n
+
+    PrismaClientValidationError: 
+    Invalid `prisma.medicalRecord.create()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\daos\medical-record.dao.ts:54:39
+
+      51     doctorId: string,
+      52     data: CreateMedicalRecordDataDto
+      53 ) => {
+    â†’ 54     return await prisma.medicalRecord.create({
+               data: {
+                 doctorId: "1a9a6186-1036-44ae-bf1e-0db7304f9b8c",
+                 visitId: "26fb5ef3-cfbc-4ca0-a4b6-b2268b6b32ac",
+                 title: "áº¢nh",
+                 diagnosis: undefined,
+                 treatments: undefined,
+                 notes: null,
+             +   symptoms: String
+               },
+               include: {
+                 doctor: {
+                   include: {
+                     staff: {
+                       include: {
+                         user: {
+                           select: {
+                             id: true,
+                             username: true,
+                             email: true,
+                             name: true
+                           }
+                         }
+                       }
+                     }
+                   }
+                 },
+                 visit: {
+                   include: {
+                     patient: {
+                       include: {
+                         user: {
+                           select: {
+                             id: true,
+                             username: true,
+                             email: true,
+                             name: true
+                           }
+                         }
+                       }
+                     }
+                   }
+                 }
+               }
+             })
+
+    Argument `symptoms` is missing.
+
+    [0m [90m 52 |[39m     data[33m:[39m [33mCreateMedicalRecordDataDto[39m
+     [90m 53 |[39m ) [33m=>[39m {
+    [31m[1m>[22m[39m[90m 54 |[39m     [36mreturn[39m [36mawait[39m 
+prisma[33m.[39mmedicalRecord[33m.[39mcreate({
+     [90m    |[39m            [31m[1m^[22m[39m
+     [90m 55 |[39m         data[33m:[39m {
+     [90m 56 |[39m             doctorId[33m,[39m
+     [90m 57 |[39m             visitId[33m:[39m data[33m.[39mvisitId[33m,[39m[0m
+
+      at Nn (node_modules/@prisma/client/src/runtime/core/errorRendering/throwValidationException.ts:45:9)
+      at ei.throwValidationException [as handleRequestError] 
+(node_modules/@prisma/client/src/runtime/RequestHandler.ts:202:7)
+      at ei.handleAndLogRequestError (node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+      at ei.request (node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+      at a (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+      at createMedicalRecord (src/daos/medical-record.dao.ts:54:12)
+      at Object.createMedicalRecord (src/services/medical-record.service.ts:94:27)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:439:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:437:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 2: Há»“ sÆ¡ bá»‡nh Ă¡n & Táº£i 
+file â€º TC50: [EP] XĂ³a tá»‡p Ä‘Ănh kĂ¨m: BĂ¡c sÄ© chá»§ quáº£n
+
+    PrismaClientValidationError: 
+    Invalid `prisma.medicalRecord.create()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\daos\medical-record.dao.ts:54:39
+
+      51     doctorId: string,
+      52     data: CreateMedicalRecordDataDto
+      53 ) => {
+    â†’ 54     return await prisma.medicalRecord.create({
+               data: {
+                 doctorId: "1a9a6186-1036-44ae-bf1e-0db7304f9b8c",
+                 visitId: "ed5d1497-f2fe-4307-8c0a-4b1337b99c4a",
+                 title: "áº¢nh",
+                 diagnosis: undefined,
+                 treatments: undefined,
+                 notes: null,
+             +   symptoms: String
+               },
+               include: {
+                 doctor: {
+                   include: {
+                     staff: {
+                       include: {
+                         user: {
+                           select: {
+                             id: true,
+                             username: true,
+                             email: true,
+                             name: true
+                           }
+                         }
+                       }
+                     }
+                   }
+                 },
+                 visit: {
+                   include: {
+                     patient: {
+                       include: {
+                         user: {
+                           select: {
+                             id: true,
+                             username: true,
+                             email: true,
+                             name: true
+                           }
+                         }
+                       }
+                     }
+                   }
+                 }
+               }
+             })
+
+    Argument `symptoms` is missing.
+
+    [0m [90m 52 |[39m     data[33m:[39m [33mCreateMedicalRecordDataDto[39m
+     [90m 53 |[39m ) [33m=>[39m {
+    [31m[1m>[22m[39m[90m 54 |[39m     [36mreturn[39m [36mawait[39m 
+prisma[33m.[39mmedicalRecord[33m.[39mcreate({
+     [90m    |[39m            [31m[1m^[22m[39m
+     [90m 55 |[39m         data[33m:[39m {
+     [90m 56 |[39m             doctorId[33m,[39m
+     [90m 57 |[39m             visitId[33m:[39m data[33m.[39mvisitId[33m,[39m[0m
+
+      at Nn (node_modules/@prisma/client/src/runtime/core/errorRendering/throwValidationException.ts:45:9)
+      at ei.throwValidationException [as handleRequestError] 
+(node_modules/@prisma/client/src/runtime/RequestHandler.ts:202:7)
+      at ei.handleAndLogRequestError (node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+      at ei.request (node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+      at a (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+      at createMedicalRecord (src/daos/medical-record.dao.ts:54:12)
+      at Object.createMedicalRecord (src/services/medical-record.service.ts:94:27)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:449:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:446:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 3: Dá»‹ch vá»¥ chá»‰ Ä‘á»‹nh 
+(Direct service validation) â€º TC51: [BVA] createServiceUsage: Sá»‘ lÆ°á»£ng = 0 (Tháº¥t báº¡i)
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: {"createdAt": 2026-05-09T06:44:49.607Z, "id": "30fdebd2-c26c-47a5-8340-c25c23ac45e8", 
+"medicalService": {"description": "Desc", "id": "MSV-0128a823-b1cf-4152-96b6-a24b02578806", "name": "U", "price": 
+999}, "medicalServiceId": "MSV-0128a823-b1cf-4152-96b6-a24b02578806", "orderedAt": 2026-05-09T06:44:49.607Z, 
+"orderedByUserId": "1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "paid": false, "price": 999, "quantity": 0, "status": 
+"ordered", "updatedAt": 2026-05-09T06:44:49.607Z, "visit": {"appointmentId": null, "createdAt": 
+2026-05-09T06:44:49.594Z, "doctorId": "1a9a6186-1036-44ae-bf1e-0db7304f9b8c", "ehrId": 
+"95af0451-51e5-48a2-9271-abd3adf07624", "endTime": null, "id": "42bb81e9-b76b-44b3-895b-f8323e109954", 
+"medicalServiceId": null, "nextVisitDate": null, "patient": {"patientId": "PAT003", "user": {"name": {"firstName": 
+"Nguyá»…n Minh", "lastName": "Tuáº¥n", "userId": "06f472db-0bfd-4a08-b23f-e44f2bc14330"}, "phone": "0912336324"}, 
+"userId": "06f472db-0bfd-4a08-b23f-e44f2bc14330"}, "patientUserId": "06f472db-0bfd-4a08-b23f-e44f2bc14330", 
+"startTime": null, "status": "in_progress", "type": "new", "updatedAt": 2026-05-09T06:44:49.594Z}, "visitId": 
+"42bb81e9-b76b-44b3-895b-f8323e109954"}
+
+    [0m [90m 462 |[39m                 [36mconst[39m v [33m=[39m [36mawait[39m 
+visitService[33m.[39mcreateVisit({ patientUserId[33m,[39m doctorId })[33m;[39m
+     [90m 463 |[39m                 [36mconst[39m s [33m=[39m [36mawait[39m 
+prisma[33m.[39mmedicalService[33m.[39mfindFirst()[33m;[39m
+    [31m[1m>[22m[39m[90m 464 |[39m                 [36mawait[39m 
+expect(visitServiceService[33m.[39mcreateServiceUsage({ visitId[33m:[39m v[33m.[39mid[33m,[39m 
+medicalServiceId[33m:[39m s[33m.[39mid[33m,[39m quantity[33m:[39m [35m0[39m[33m,[39m 
+orderedByUserId[33m:[39m doctorId }))[33m.[39mrejects[33m.[39mtoThrow()[33m;[39m
+     [90m     |[39m                       [31m[1m^[22m[39m
+     [90m 465 |[39m             })[33m;[39m
+     [90m 466 |[39m         })[33m;[39m
+     [90m 467 |[39m[0m
+
+      at expect (node_modules/expect/build/index.js:2116:15)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:464:23
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:461:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 3: Dá»‹ch vá»¥ chá»‰ Ä‘á»‹nh 
+(Direct service validation) â€º TC55: [EP] listServiceUsages: Bá»‡nh nhĂ¢n chá»‰ tháº¥y cá»§a mĂ¬nh
+
+    Query operation failed: 
+    Invalid `this.delegate.findMany()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:154:31
+
+      151 const skip = limit ? (page - 1) * limit : undefined;
+      152 
+      153 const [data, totalItems] = await Promise.all([
+    â†’ 154     this.delegate.findMany({
+                where: {
+                  visitId: {
+                    in: []
+                  }
+                },
+                include: {
+                  visit: {
+                    include: {
+                      patient: {
+                        include: {
+                          user: {
+                            select: {
+                              name: true,
+                              phone: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  medicalService: {
+                    select: {
+                      id: true,
+                      name: true,
+                      price: true
+                    }
+                  }
+                },
+                orderBy: {
+                  createdAt: "desc"
+                },
+                skip: undefined,
+              + take: Int
+              })
+
+    Argument `take` is missing.
+
+    [0m [90m 445 |[39m         }
+     [90m 446 |[39m
+    [31m[1m>[22m[39m[90m 447 |[39m         [36mthrow[39m [36mnew[39m [33mCustomError[39m(
+     [90m     |[39m               [31m[1m^[22m[39m
+     [90m 448 |[39m             [33mErrorType[39m[33m.[39m[33mINTERNAL_ERROR[39m[33m,[39m
+     [90m 449 |[39m             [32m`Query operation failed: ${error.message}`[39m
+     [90m 450 |[39m         )[33m;[39m[0m
+
+      at QueryBuilder.handleError (src/helpers/queryBuilder.ts:447:15)
+      at QueryBuilder.findManyWithPagination (src/helpers/queryBuilder.ts:180:18)
+      at VisitServiceDAO.findAll (src/daos/visit-service.dao.ts:147:16)
+      at VisitServiceService.listServiceUsages (src/services/visit-service.service.ts:118:16)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:496:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:495:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 3: Dá»‹ch vá»¥ chá»‰ Ä‘á»‹nh 
+(Direct service validation) â€º TC58: [EP] getVisitHistory: Quyá»n BĂ¡c sÄ© xem lá»‹ch sá» lÆ°á»£t khĂ¡m
+
+    expect(received).toBeDefined()
+
+    Received: undefined
+
+    [0m [90m 523 |[39m                 [36mconst[39m v [33m=[39m [36mawait[39m 
+visitService[33m.[39mcreateVisit({ patientUserId[33m,[39m doctorId })[33m;[39m
+     [90m 524 |[39m                 [36mconst[39m res [33m=[39m [36mawait[39m 
+visitServiceService[33m.[39mgetVisitHistory(v[33m.[39mid[33m,[39m {}[33m,[39m [32m'doctor'[39m[33m,[39m 
+doctorId)[33m;[39m
+    [31m[1m>[22m[39m[90m 525 |[39m                 expect(res[33m.[39mdata)[33m.[39mtoBeDefined()[33m;[39m
+     [90m     |[39m                                  [31m[1m^[22m[39m
+     [90m 526 |[39m             })[33m;[39m
+     [90m 527 |[39m         })[33m;[39m
+     [90m 528 |[39m[0m
+
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:525:34
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:522:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 3: Dá»‹ch vá»¥ chá»‰ Ä‘á»‹nh 
+(Direct service validation) â€º TC65: [EP] listServiceUsages: Quyá»n Admin xem toĂn bá»™
+
+    Query operation failed: 
+    Invalid `this.delegate.findMany()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:154:31
+
+      151 const skip = limit ? (page - 1) * limit : undefined;
+      152 
+      153 const [data, totalItems] = await Promise.all([
+    â†’ 154     this.delegate.findMany({
+                where: {},
+                include: {
+                  visit: {
+                    include: {
+                      patient: {
+                        include: {
+                          user: {
+                            select: {
+                              name: true,
+                              phone: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  medicalService: {
+                    select: {
+                      id: true,
+                      name: true,
+                      price: true
+                    }
+                  }
+                },
+                orderBy: {
+                  createdAt: "desc"
+                },
+                skip: undefined,
+              + take: Int
+              })
+
+    Argument `take` is missing.
+
+    [0m [90m 445 |[39m         }
+     [90m 446 |[39m
+    [31m[1m>[22m[39m[90m 447 |[39m         [36mthrow[39m [36mnew[39m [33mCustomError[39m(
+     [90m     |[39m               [31m[1m^[22m[39m
+     [90m 448 |[39m             [33mErrorType[39m[33m.[39m[33mINTERNAL_ERROR[39m[33m,[39m
+     [90m 449 |[39m             [32m`Query operation failed: ${error.message}`[39m
+     [90m 450 |[39m         )[33m;[39m[0m
+
+      at QueryBuilder.handleError (src/helpers/queryBuilder.ts:447:15)
+      at QueryBuilder.findManyWithPagination (src/helpers/queryBuilder.ts:180:18)
+      at VisitServiceDAO.findAll (src/daos/visit-service.dao.ts:147:16)
+      at VisitServiceService.listServiceUsages (src/services/visit-service.service.ts:118:16)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:592:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:591:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 3: Dá»‹ch vá»¥ chá»‰ Ä‘á»‹nh 
+(Direct service validation) â€º TC70: [EP] listServiceUsages: Lá»c theo status "done"
+
+    Query operation failed: 
+    Invalid `this.delegate.findMany()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:154:31
+
+      151 const skip = limit ? (page - 1) * limit : undefined;
+      152 
+      153 const [data, totalItems] = await Promise.all([
+    â†’ 154     this.delegate.findMany({
+                where: {
+                  status: "done"
+                },
+                include: {
+                  visit: {
+                    include: {
+                      patient: {
+                        include: {
+                          user: {
+                            select: {
+                              name: true,
+                              phone: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  medicalService: {
+                    select: {
+                      id: true,
+                      name: true,
+                      price: true
+                    }
+                  }
+                },
+                orderBy: {
+                  createdAt: "desc"
+                },
+                skip: undefined,
+              + take: Int
+              })
+
+    Argument `take` is missing.
+
+    [0m [90m 445 |[39m         }
+     [90m 446 |[39m
+    [31m[1m>[22m[39m[90m 447 |[39m         [36mthrow[39m [36mnew[39m [33mCustomError[39m(
+     [90m     |[39m               [31m[1m^[22m[39m
+     [90m 448 |[39m             [33mErrorType[39m[33m.[39m[33mINTERNAL_ERROR[39m[33m,[39m
+     [90m 449 |[39m             [32m`Query operation failed: ${error.message}`[39m
+     [90m 450 |[39m         )[33m;[39m[0m
+
+      at QueryBuilder.handleError (src/helpers/queryBuilder.ts:447:15)
+      at QueryBuilder.findManyWithPagination (src/helpers/queryBuilder.ts:180:18)
+      at VisitServiceDAO.findAll (src/daos/visit-service.dao.ts:147:16)
+      at VisitServiceService.listServiceUsages (src/services/visit-service.service.ts:118:16)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:633:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:632:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 3: Dá»‹ch vá»¥ chá»‰ Ä‘á»‹nh 
+(Direct service validation) â€º TC71: [BVA] listServiceUsages: PhĂ¢n trang trang cuá»‘i
+
+    Query operation failed: 
+    Invalid `this.delegate.findMany()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\helpers\queryBuilder.ts:154:31
+
+      151 const skip = limit ? (page - 1) * limit : undefined;
+      152 
+      153 const [data, totalItems] = await Promise.all([
+    â†’ 154     this.delegate.findMany({
+                where: {},
+                include: {
+                  visit: {
+                    include: {
+                      patient: {
+                        include: {
+                          user: {
+                            select: {
+                              name: true,
+                              phone: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  medicalService: {
+                    select: {
+                      id: true,
+                      name: true,
+                      price: true
+                    }
+                  }
+                },
+                orderBy: {
+                  createdAt: "desc"
+                },
+                skip: undefined,
+              + take: Int
+              })
+
+    Argument `take` is missing.
+
+    [0m [90m 445 |[39m         }
+     [90m 446 |[39m
+    [31m[1m>[22m[39m[90m 447 |[39m         [36mthrow[39m [36mnew[39m [33mCustomError[39m(
+     [90m     |[39m               [31m[1m^[22m[39m
+     [90m 448 |[39m             [33mErrorType[39m[33m.[39m[33mINTERNAL_ERROR[39m[33m,[39m
+     [90m 449 |[39m             [32m`Query operation failed: ${error.message}`[39m
+     [90m 450 |[39m         )[33m;[39m[0m
+
+      at QueryBuilder.handleError (src/helpers/queryBuilder.ts:447:15)
+      at QueryBuilder.findManyWithPagination (src/helpers/queryBuilder.ts:180:18)
+      at VisitServiceDAO.findAll (src/daos/visit-service.dao.ts:147:16)
+      at VisitServiceService.listServiceUsages (src/services/visit-service.service.ts:118:16)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:640:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:639:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 4: ÄÆ¡n thuá»‘c & TĂnh toĂ¡n 
+chi phĂ â€º TC_BS_QLK_S_77: [BVA] addMedicinesToPrescription: Ghi chĂº rá»—ng (Tháº¥t báº¡i)
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: [{"createdAt": 2026-05-09T06:44:50.021Z, "drugName": "A", "id": 
+"1f896ade-f875-47e2-8978-2c37f5d6319a", "isPurchased": false, "medicine": {"brandName": "Panadol", "category": "Giáº£m 
+Ä‘au", "contraindications": ["Dá»‹ á»©ng paracetamol", "Suy gan náº·ng"], "country": "Anh", "createdAt": 
+2025-10-24T09:08:50.802Z, "description": "Thuá»‘c giáº£m Ä‘au, háº¡ sá»‘t cho ngÆ°á»i lá»›n vĂ tráº» em trĂªn 12 
+tuá»•i.", "dosage": "500mg", "form": "ViĂªn nĂ©n", "genericName": "Paracetamol", "id": 
+"ea471c92-8520-4811-921f-dc1e3a1745e3", "indications": ["Äau Ä‘áº§u", "Sá»‘t", "Äau cÆ¡"], "interactions": 
+["RÆ°á»£u", "Thuá»‘c chá»‘ng Ä‘Ă´ng mĂ¡u"], "manufacturer": "GlaxoSmithKline", "name": "Paracetamol 500mg", "price": 
+5000, "sideEffects": ["Buá»“n nĂ´n", "PhĂ¡t ban"], "status": "available", "stock": 1000, "storageConditions": "Báº£o 
+quáº£n nÆ¡i khĂ´ rĂ¡o, dÆ°á»›i 25Â°C", "unit": "ViĂªn", "updatedAt": 2025-10-24T09:08:50.802Z}, "medicineId": 
+"ea471c92-8520-4811-921f-dc1e3a1745e3", "note": null, "prescription": {"id": "619ee857-057a-4769-8e02-94e86e61d64a", 
+"paid": false, "visitId": "d230d8ec-7c31-4c9d-9f84-98e27ff5bca9"}, "prescriptionId": 
+"619ee857-057a-4769-8e02-94e86e61d64a", "price": 0, "quantity": 1, "updatedAt": 2026-05-09T06:44:50.021Z}]
+
+    [0m [90m 707 |[39m                 [36mconst[39m p [33m=[39m [36mawait[39m 
+prescriptionService[33m.[39mcreatePrescription(doctorId[33m,[39m { visitId[33m:[39m v[33m.[39mid })[33m;[39m
+     [90m 708 |[39m                 [36mconst[39m med [33m=[39m [36mawait[39m 
+prisma[33m.[39mmedicine[33m.[39mfindFirst()[33m;[39m
+    [31m[1m>[22m[39m[90m 709 |[39m                 [36mawait[39m 
+expect(prescriptionService[33m.[39maddMedicinesToPrescription(p[33m.[39mid[33m,[39m doctorId[33m,[39m [{ 
+medicineId[33m:[39m med[33m.[39mid[33m,[39m quantity[33m:[39m [35m1[39m[33m,[39m note[33m:[39m 
+[32m''[39m[33m,[39m drugName[33m:[39m [32m'A'[39m }]))[33m.[39mrejects[33m.[39mtoThrow()[33m;[39m
+     [90m     |[39m                       [31m[1m^[22m[39m
+     [90m 710 |[39m             })[33m;[39m
+     [90m 711 |[39m         })[33m;[39m
+     [90m 712 |[39m[0m
+
+      at expect (node_modules/expect/build/index.js:2116:15)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:709:23
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:705:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 4: ÄÆ¡n thuá»‘c & TĂnh toĂ¡n 
+chi phĂ â€º TC_BS_QLK_S_78: [Logic] TĂnh tiá»n thuá»‘c: GiĂ¡ Ä‘Æ¡n vá»‹ * Sá»‘ lÆ°á»£ng (Nghiá»‡p vá»¥: FAIL)
+
+    TypeError: visit_service_1.default.calculateVisiTC_BS_QLK_S_ost is not a function
+
+    [0m [90m 717 |[39m                 [36mconst[39m med [33m=[39m [36mawait[39m 
+prisma[33m.[39mmedicine[33m.[39mfindFirst()[33m;[39m
+     [90m 718 |[39m                 [36mawait[39m (prisma [36mas[39m 
+any)[33m.[39mmedicineUsage[33m.[39mcreate({ data[33m:[39m { prescriptionId[33m:[39m p[33m.[39mid[33m,[39m 
+medicineId[33m:[39m med[33m.[39mid[33m,[39m quantity[33m:[39m [35m10[39m[33m,[39m price[33m:[39m 
+[35m50[39m[33m,[39m drugName[33m:[39m [32m'A'[39m } })[33m;[39m
+    [31m[1m>[22m[39m[90m 719 |[39m                 [36mconst[39m res [33m=[39m [36mawait[39m 
+visitService[33m.[39mcalculateVisiTC_BS_QLK_S_ost(v[33m.[39mid)[33m;[39m
+     [90m     |[39m                                                [31m[1m^[22m[39m
+     [90m 720 |[39m                 expect(res[33m.[39mmedicinesCost)[33m.[39mtoBe([35m500[39m)[33m;[39m 
+[90m// 10 * 50[39m
+     [90m 721 |[39m             })[33m;[39m
+     [90m 722 |[39m         })[33m;[39m[0m
+
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:719:48
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:714:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 4: ÄÆ¡n thuá»‘c & TĂnh toĂ¡n 
+chi phĂ â€º TC_BS_QLK_S_88: [EP] deleteMedicineUsage: ThĂnh cĂ´ng (BĂ¡c sÄ© chá»§ quáº£n)
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: undefined
+
+    [0m [90m 809 |[39m                 [36mconst[39m mu [33m=[39m [36mawait[39m (prisma [36mas[39m 
+any)[33m.[39mmedicineUsage[33m.[39mcreate({ data[33m:[39m { prescriptionId[33m:[39m p[33m.[39mid[33m,[39m 
+medicineId[33m:[39m med[33m.[39mid[33m,[39m quantity[33m:[39m [35m1[39m[33m,[39m price[33m:[39m 
+[35m100[39m[33m,[39m drugName[33m:[39m [32m'A'[39m } })[33m;[39m
+     [90m 810 |[39m                 [36mconst[39m res [33m=[39m [36mawait[39m 
+prescriptionService[33m.[39mdeleteMedicineUsage(mu[33m.[39mid[33m,[39m doctorId)[33m;[39m
+    [31m[1m>[22m[39m[90m 811 |[39m                 
+expect(res[33m.[39msuccess)[33m.[39mtoBe([36mtrue[39m)[33m;[39m
+     [90m     |[39m                                     [31m[1m^[22m[39m
+     [90m 812 |[39m             })[33m;[39m
+     [90m 813 |[39m         })[33m;[39m
+     [90m 814 |[39m[0m
+
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:811:37
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:805:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 4: ÄÆ¡n thuá»‘c & TĂnh toĂ¡n 
+chi phĂ â€º TC_BS_QLK_S_91: [EP] updatePrescription: Sá»a ghi chĂº Ä‘Æ¡n thuá»‘c
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Updated note"
+    Received: undefined
+
+    [0m [90m 836 |[39m                 [36mconst[39m p [33m=[39m [36mawait[39m 
+prescriptionService[33m.[39mcreatePrescription(doctorId[33m,[39m { visitId[33m:[39m v[33m.[39mid })[33m;[39m
+     [90m 837 |[39m                 [36mconst[39m res [33m=[39m [36mawait[39m 
+prescriptionService[33m.[39mupdatePrescription(p[33m.[39mid[33m,[39m doctorId[33m,[39m { note[33m:[39m 
+[32m'Updated note'[39m })[33m;[39m
+    [31m[1m>[22m[39m[90m 838 |[39m                 expect(res[33m.[39mnote)[33m.[39mtoBe([32m'Updated 
+note'[39m)[33m;[39m
+     [90m     |[39m                                  [31m[1m^[22m[39m
+     [90m 839 |[39m             })[33m;[39m
+     [90m 840 |[39m         })[33m;[39m
+     [90m 841 |[39m[0m
+
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:838:34
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:834:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 4: ÄÆ¡n thuá»‘c & TĂnh toĂ¡n 
+chi phĂ â€º TC_BS_QLK_S_98: [EP] calculateVisiTC_BS_QLK_S_ost: Khi cĂ³ nhiá»u dá»‹ch vá»¥ vĂ thuá»‘c há»—n há»£p
+
+    TypeError: visit_service_1.default.calculateVisiTC_BS_QLK_S_ost is not a function
+
+    [0m [90m 892 |[39m                 [36mconst[39m med [33m=[39m [36mawait[39m 
+prisma[33m.[39mmedicine[33m.[39mfindFirst()[33m;[39m
+     [90m 893 |[39m                 [36mawait[39m (prisma [36mas[39m 
+any)[33m.[39mmedicineUsage[33m.[39mcreate({ data[33m:[39m { prescriptionId[33m:[39m p[33m.[39mid[33m,[39m 
+medicineId[33m:[39m med[33m.[39mid[33m,[39m quantity[33m:[39m [35m1[39m[33m,[39m price[33m:[39m 
+[35m100[39m[33m,[39m drugName[33m:[39m [32m'A'[39m } })[33m;[39m
+    [31m[1m>[22m[39m[90m 894 |[39m                 [36mconst[39m res [33m=[39m [36mawait[39m 
+visitService[33m.[39mcalculateVisiTC_BS_QLK_S_ost(v[33m.[39mid)[33m;[39m
+     [90m     |[39m                                                [31m[1m^[22m[39m
+     [90m 895 |[39m                 expect(res[33m.[39mtotalCost)[33m.[39mtoBeGreaterThan([35m0[39m)[33m;[39m
+     [90m 896 |[39m             })[33m;[39m
+     [90m 897 |[39m         })[33m;[39m[0m
+
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:894:48
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:887:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 4: ÄÆ¡n thuá»‘c & TĂnh toĂ¡n 
+chi phĂ â€º TC_BS_QLK_S_99: [EP] getPrescriptionById: Quyá»n Staff truy cáºp
+
+    You do not have access to this prescription
+
+    [0m [90m 112 |[39m
+     [90m 113 |[39m         [36mif[39m ([33m![39mhasAccess) {
+    [31m[1m>[22m[39m[90m 114 |[39m             [36mthrow[39m [36mnew[39m [33mCustomError[39m(
+     [90m     |[39m                   [31m[1m^[22m[39m
+     [90m 115 |[39m                 [33mErrorType[39m[33m.[39m[33mFORBIDDEN[39m[33m,[39m
+     [90m 116 |[39m                 [32m'You do not have access to this prescription'[39m
+     [90m 117 |[39m             )[33m;[39m[0m
+
+      at Object.getPrescriptionById (src/services/prescription.service.ts:114:19)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:903:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:900:13)
+
+  â— Unit Test Service - Visit Management (Century Suite 100 Explicit Cases) â€º NhĂ³m 4: ÄÆ¡n thuá»‘c & TĂnh toĂ¡n 
+chi phĂ â€º TC_BS_QLK_S_100: [Logic] HoĂn táº¥t lÆ°á»£t khĂ¡m: Äá»“ng bá»™ tráº¡ng thĂ¡i Appointment (Transaction 
+coverage)
+
+    PrismaClientValidationError: 
+    Invalid `any).appointment.create()` invocation in
+    D:\Unit-test-SQA\Do_An_Backend-develop\src\tests\unit\services\Bac_Si\BS_quan_ly_luot_kham\visit_management.service
+.test.ts:910:63
+
+      907 
+      908 it('TC_BS_QLK_S_100: [Logic] HoĂn táº¥t lÆ°á»£t khĂ¡m: Äá»“ng bá»™ tráº¡ng thĂ¡i Appointment (Transaction 
+coverage)', async () => {
+      909     await runTest(async () => {
+    â†’ 910         const app = await (prisma as any).appointment.create({
+                    data: {
+                      patientUserId: "06f472db-0bfd-4a08-b23f-e44f2bc14330",
+                      doctorId: "1a9a6186-1036-44ae-bf1e-0db7304f9b8c",
+                      startTime: new Date("2026-05-09T06:44:50.284Z"),
+                      status: "scheduled",
+                      reason: "SQA Test",
+                  +   patient: {
+                  +     create: PatientCreateWithoutAppointmentsInput | PatientUncheckedCreateWithoutAppointmentsInput,
+                  +     connectOrCreate: PatientCreateOrConnectWithoutAppointmentsInput,
+                  +     connect: PatientWhereUniqueInput
+                  +   }
+                    }
+                  })
+
+    Argument `patient` is missing.
+
+    [0m [90m 908 |[39m         it([32m'TC_BS_QLK_S_100: [Logic] HoĂn táº¥t lÆ°á»£t khĂ¡m: Äá»“ng bá»™ tráº¡ng 
+thĂ¡i Appointment (Transaction coverage)'[39m[33m,[39m [36masync[39m () [33m=>[39m {
+     [90m 909 |[39m             [36mawait[39m runTest([36masync[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 910 |[39m                 [36mconst[39m app [33m=[39m [36mawait[39m (prisma 
+[36mas[39m any)[33m.[39mappointment[33m.[39mcreate({ data[33m:[39m { patientUserId[33m,[39m 
+doctorId[33m,[39m startTime[33m:[39m [36mnew[39m [33mDate[39m()[33m,[39m status[33m:[39m 
+[32m'scheduled'[39m[33m,[39m reason[33m:[39m [32m'SQA Test'[39m } })[33m;[39m
+     [90m     |[39m                             [31m[1m^[22m[39m
+     [90m 911 |[39m                 [36mconst[39m v [33m=[39m [36mawait[39m 
+visitService[33m.[39mcreateVisit({ patientUserId[33m,[39m doctorId[33m,[39m appointmentId[33m:[39m 
+app[33m.[39mid })[33m;[39m
+     [90m 912 |[39m                 [36mconst[39m res [33m=[39m [36mawait[39m 
+visitService[33m.[39mcompleteVisit(v[33m.[39mid[33m,[39m doctorId[33m,[39m [32m'doctor'[39m)[33m;[39m
+     [90m 913 |[39m                 expect(res[33m.[39mstatus)[33m.[39mtoBe([32m'completed'[39m)[33m;[39m[0m
+
+      at Nn (node_modules/@prisma/client/src/runtime/core/errorRendering/throwValidationException.ts:45:9)
+      at ei.throwValidationException [as handleRequestError] 
+(node_modules/@prisma/client/src/runtime/RequestHandler.ts:202:7)
+      at ei.handleAndLogRequestError (node_modules/@prisma/client/src/runtime/RequestHandler.ts:174:12)
+      at ei.request (node_modules/@prisma/client/src/runtime/RequestHandler.ts:143:12)
+      at a (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:833:24)
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:910:29
+      at src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:41:23
+      at Proxy._transactionWithCallback (node_modules/@prisma/client/src/runtime/getPrismaClient.ts:722:18)
+      at runTest (src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:32:13)
+      at Object.<anonymous> 
+(src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts:909:13)
+
+Test Suites: 1 failed, 1 total
+Tests:       28 failed, 72 passed, 100 total
+Snapshots:   0 total
+Time:        3.064 s
+Ran all test suites matching src/tests/unit/services/Bac_Si/BS_quan_ly_luot_kham/visit_management.service.test.ts.

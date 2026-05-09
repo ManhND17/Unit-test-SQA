@@ -595,4 +595,5 @@ export default {
     rejectArticleReview,
     approvalArticleReview,
     requestEditArticle,
+    incrementViewCount,
 };

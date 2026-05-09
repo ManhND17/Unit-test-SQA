@@ -237,7 +237,6 @@ export const findLatestArticlesByAllCategory = async (options: {
                 name: true,
                 slug: true,
                 description: true,
-                status: true,
                 _count: {
                     select: {
                         articles: {
