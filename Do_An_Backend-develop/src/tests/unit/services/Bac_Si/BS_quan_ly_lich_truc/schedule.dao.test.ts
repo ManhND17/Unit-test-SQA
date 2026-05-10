@@ -13,7 +13,30 @@ describe('Integration Test Schedule DAO - SQA Full Suite (15 Cases)', () => {
 
     const runTest = async (fn: (tx: any) => Promise<void>) => {
         await prisma.$transaction(async (tx) => {
-            await fn(tx);
+            const originals: any = {};
+            const models = ['schedule', 'appointment', 'user', 'patient', 'staff', 'doctor', 'department', 'room'];
+            const originalTx = prisma.$transaction;
+            
+            // Mock prisma.$transaction to return the current tx
+            (prisma as any).$transaction = (cb: any) => cb(tx);
+            
+            // Mock all models to use the current tx
+            models.forEach(m => {
+                if ((prisma as any)[m]) {
+                    originals[m] = (prisma as any)[m];
+                    (prisma as any)[m] = tx[m];
+                }
+            });
+
+            try {
+                await fn(tx);
+            } finally {
+                // Restore original prisma state
+                (prisma as any).$transaction = originalTx;
+                models.forEach(m => {
+                    if (originals[m]) (prisma as any)[m] = originals[m];
+                });
+            }
             throw new Error('ROLLBACK');
         }).catch(err => { if (err.message !== 'ROLLBACK') throw err; });
     };

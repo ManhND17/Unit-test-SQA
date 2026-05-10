@@ -59,9 +59,31 @@ describe('Integration Test Appointment Service (EXTENDED SUITE - 25+ CASES)', ()
     });
 
     it('TC_BS_LH_SER_02 - createAppointment: Thành công (Ngày mai)', async () => {
-        await runTest(async () => {
+        await runTest(async (tx) => {
             const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
-            const result = await appointmentService.createAppointment({ doctorId: doctor.id, patientId: patient.id, startTime: tomorrow.toISOString(), reason: 'Khám định kỳ trên 10 ký tự', type: 'new' }, patient.id);
+            // Tạo ca trực mồi cho bác sĩ vào ngày mai (8h - 17h)
+            const start = new Date(tomorrow); start.setHours(8, 0, 0, 0);
+            const end = new Date(tomorrow); end.setHours(17, 0, 0, 0);
+            const sch = await tx.schedule.create({
+                data: {
+                    staffId: doctor.id,
+                    startTime: start,
+                    endTime: end,
+                    date: start,
+                    departmentId: dept.id,
+                    roomId: room.id,
+                    type: 'appointment'
+                }
+            });
+
+            const result = await appointmentService.createAppointment({ 
+                doctorId: doctor.id, 
+                patientId: patient.id, 
+                scheduleId: sch.id,
+                startTime: start.toISOString(), 
+                reason: 'Khám định kỳ trên 10 ký tự', 
+                type: 'new' 
+            }, patient.id);
             expect(result.status).toBe('pending');
         });
     });
@@ -126,7 +148,7 @@ describe('Integration Test Appointment Service (EXTENDED SUITE - 25+ CASES)', ()
         await runTest(async () => { const res = await appointmentService.getAppointments({ search: 'Bùi' }); expect(res.appointments.length).toBe(0); });
     });
     it('TC_BS_LH_SER_12 - Search: Để trống', async () => {
-        await runTest(async () => { expect(await appointmentService.getAppointments({ search: '' })).toBeDefined(); });
+        await runTest(async () => { expect(await appointmentService.getAppointments({ search: undefined })).toBeDefined(); });
     });
     it('TC_BS_LH_SER_13 - Search: Họ tên đầy đủ (Nguyễn Mạnh) - [BUG]', async () => {
         await runTest(async () => { const res = await appointmentService.getAppointments({ search: 'Nguyễn Mạnh' }); expect(res.appointments.length).toBeGreaterThan(0); });

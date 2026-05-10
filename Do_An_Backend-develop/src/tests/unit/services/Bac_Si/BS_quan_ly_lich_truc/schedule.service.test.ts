@@ -48,17 +48,35 @@ describe('Integration Test Schedule Service - SQA Final Suite (20 Cases)', () =>
         });
     });
 
-    // --- SECURITY & FORBIDDEN ---
-    it('TC_BS_LT_SER_04 - Update: Lỗi Forbidden khi sửa lịch người khác', async () => {
+    // --- BUGS & BUSINESS RULES DETECTORS ---
+    it('TC_BS_LT_SER_04 - [BUG] Overlap: Không cho phép tạo ca trùng 1 phần thời gian', async () => {
         await runTest(async (tx) => {
-            const sch = await tx.schedule.create({ data: { staffId: doctorB.id, departmentId: dept.id, roomId: room.id, date: new Date(), startTime: new Date(), endTime: new Date(), type: 'work' } });
-            await expect(scheduleService.updateScheduleService({ id: sch.id, maxSlot: 5 }, doctorA.id)).rejects.toMatchObject({ type: ErrorType.FORBIDDEN });
+            // Tạo ca làm việc 1: 07:00 - 13:00
+            await tx.schedule.create({ 
+                data: { staffId: doctorA.id, departmentId: dept.id, roomId: room.id, date: new Date('2026-04-06'), startTime: new Date('2026-04-06T07:00:00Z'), endTime: new Date('2026-04-06T13:00:00Z'), type: 'work' } 
+            });
+            // Tạo ca làm việc 2 trùng lặp: 09:00 - 19:00
+            const overlap = { staffId: doctorA.id, departmentId: dept.id, roomId: room.id, date: '2026-04-06', startTime: '2026-04-06T09:00:00Z', endTime: '2026-04-06T19:00:00Z', type: 'work' as any };
+            
+            // Nếu tạo thành công (không throw lỗi) thì test này sẽ FAIL vì mong đợi phải Reject
+            await expect(scheduleService.createScheduleService(overlap)).rejects.toThrow();
         });
     });
-    it('TC_BS_LT_SER_05 - Delete: Lỗi Forbidden khi xóa lịch người khác', async () => {
+
+    it('TC_BS_LT_SER_05 - [BUG] Slot: Không cho phép giảm slot thấp hơn số bệnh nhân đã đặt', async () => {
         await runTest(async (tx) => {
-            const sch = await tx.schedule.create({ data: { staffId: doctorB.id, departmentId: dept.id, roomId: room.id, date: new Date(), startTime: new Date(), endTime: new Date(), type: 'work' } });
-            await expect(scheduleService.deleteScheduleService(sch.id, doctorA.id)).rejects.toMatchObject({ type: ErrorType.FORBIDDEN });
+            // Tạo ca làm việc ban đầu có 5 slot
+            const sch = await tx.schedule.create({ 
+                data: { staffId: doctorA.id, departmentId: dept.id, roomId: room.id, date: new Date(), startTime: new Date(), endTime: new Date(), type: 'work', maxSlot: 5 } 
+            });
+            // Giả lập có 5 người đã đăng ký khám
+            const appointments = Array.from({ length: 5 }).map((_, i) => ({
+                patientId: patient.id, doctorId: doctorA.id, scheduleId: sch.id, startTime: new Date(), reason: `Test ${i}`, status: 'confirmed'
+            }));
+            await tx.appointment.createMany({ data: appointments });
+
+            // Thử update slot xuống 3 (nhỏ hơn 5). Nếu thành công thì test này sẽ FAIL.
+            await expect(scheduleService.updateScheduleService({ id: sch.id, maxSlot: 3 }, doctorA.id)).rejects.toThrow();
         });
     });
 
