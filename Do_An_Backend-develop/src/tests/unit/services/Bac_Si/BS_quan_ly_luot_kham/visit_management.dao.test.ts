@@ -152,7 +152,7 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
                 const visit = await visitDao.createVisit({ ehrId: ehr.id, patientUserId: patient.userId });
                 await medicalRecordDao.createMedicalRecord(doctor.userId, { visitId: visit.id, title: 'R1', symptoms: 'S', diagnosis: 'D', treatments: 'T' });
                 await medicalRecordDao.createMedicalRecord(doctor.userId, { visitId: visit.id, title: 'R2', symptoms: 'S', diagnosis: 'D', treatments: 'T' });
-                
+
                 const result = await medicalRecordDao.getMedicalRecords({
                     page: 1, limit: 1, sortBy: 'createdAt', sortOrder: 'desc', doctorId: doctor.userId
                 });
@@ -166,7 +166,7 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
             await runTest(async () => {
                 const visit = await visitDao.createVisit({ ehrId: ehr.id, patientUserId: patient.userId });
                 await medicalRecordDao.createMedicalRecord(doctor.userId, { visitId: visit.id, title: 'V-Record', symptoms: 'S', diagnosis: 'D', treatments: 'T' });
-                
+
                 const result = await medicalRecordDao.getMedicalRecords({
                     page: 1, limit: 10, sortBy: 'createdAt', sortOrder: 'desc', visitId: visit.id
                 });
@@ -212,10 +212,10 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
                 const visit = await visitDao.createVisit({ ehrId: ehr.id, patientUserId: patient.userId });
                 await medicalRecordDao.createMedicalRecord(doctor.userId, { visitId: visit.id, title: 'A_Record', symptoms: 'S', diagnosis: 'D', treatments: 'T' });
                 await medicalRecordDao.createMedicalRecord(doctor.userId, { visitId: visit.id, title: 'Z_Record', symptoms: 'S', diagnosis: 'D', treatments: 'T' });
-                
+
                 const desc = await medicalRecordDao.getMedicalRecords({ page: 1, limit: 10, sortBy: 'title', sortOrder: 'desc', visitId: visit.id });
                 expect(desc.data[0].title).toBe('Z_Record');
-                
+
                 const asc = await medicalRecordDao.getMedicalRecords({ page: 1, limit: 10, sortBy: 'title', sortOrder: 'asc', visitId: visit.id });
                 expect(asc.data[0].title).toBe('A_Record');
             });
@@ -741,8 +741,24 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
     // ==========================================
     describe('Medical Service DAOs', () => {
         it('TC_BS_QLK_DAO_71: getMedicalServices - Search by name', async () => {
-            const res = await medicalServiceDao.getMedicalServices({ search: medicalService.name.substring(0, 3) });
-            expect(res.data.length).toBeGreaterThanOrEqual(1);
+            await runTest(async (tx) => {
+                const s = await tx.medicalService.create({
+                    data: {
+                        name: 'SQA Test Service',
+                        price: 100,
+                        durationMinutes: 30,
+                        departmentId: department.id,
+                        isActive: true
+                    }
+                });
+                const res = await medicalServiceDao.getMedicalServices({
+                    search: 'SQA',
+                    page: 1,
+                    limit: 10,
+                    isActive: true
+                });
+                expect(res.data.length).toBeGreaterThanOrEqual(1);
+            });
         });
 
         it('TC_BS_QLK_DAO_72: getMedicalServiceById - Detail check', async () => {
@@ -824,11 +840,11 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
                     durationMinutes: 10,
                     departmentId: department.id
                 });
-                await medicalRecordDao.createMedicalRecord(doctor.userId, { 
+                await medicalRecordDao.createMedicalRecord(doctor.userId, {
                     visitId: (await visitDao.createVisit({ ehrId: ehr.id, patientUserId: patient.userId })).id,
-                    title: 'T', symptoms: 'S', diagnosis: 'D', treatments: 'T' 
+                    title: 'T', symptoms: 'S', diagnosis: 'D', treatments: 'T'
                 }); // dummy
-                
+
                 await medicalServiceDao.createDoctorService({ doctorId: doctor.userId, medicalServiceId: tempSvc!.id, price: 100, durationMinutes: 10 });
                 await medicalServiceDao.deleteDoctorService(doctor.userId, tempSvc!.id);
                 const list = await medicalServiceDao.getListDoctorMedicalServices({ medicalServiceId: tempSvc!.id });
@@ -913,13 +929,13 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
             await runTest(async () => {
                 const v = await visitDao.createVisit({ ehrId: ehr.id, patientUserId: patient.userId });
                 await visitServiceDao.create({ visitId: v.id, medicalServiceId: medicalService.id, quantity: 1, price: 100, orderedByUserId: undefined, orderedAt: '' });
-                const res = await visitServiceDao.findAll({ 
-                    visitId: v.id, 
-                    medicalServiceId: medicalService.id, 
+                const res = await visitServiceDao.findAll({
+                    visitId: v.id,
+                    medicalServiceId: medicalService.id,
                     status: 'ordered',
                     endDate: new Date(Date.now() + 86400000).toISOString(), // Future
-                    page: 1, 
-                    limit: 10 
+                    page: 1,
+                    limit: 10
                 });
                 expect(res.data.length).toBe(1);
             });
@@ -939,7 +955,7 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
             await runTest(async () => {
                 const v = await visitDao.createVisit({ ehrId: ehr.id, patientUserId: patient.userId });
                 const vs = await visitServiceDao.create({ visitId: v.id, medicalServiceId: medicalService.id, quantity: 1, price: 100, orderedByUserId: undefined, orderedAt: '' });
-                
+
                 // Manually create an invoice and invoice item for this service
                 const invoice = await prisma.invoice.create({
                     data: { patientId: patient.userId, totalAmount: 100, status: 'pending' }
@@ -959,7 +975,7 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
                 // Update quantity -> should trigger invoice update in DAO
                 const updated = await visitServiceDao.update(vs.id, { quantity: 3 });
                 expect(updated.quantity).toBe(3);
-                
+
                 const updatedInvoice = await prisma.invoice.findUnique({ where: { id: invoice.id } });
                 expect(updatedInvoice?.totalAmount).toBe(300);
             });
@@ -969,7 +985,7 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
             await runTest(async () => {
                 const v = await visitDao.createVisit({ ehrId: ehr.id, patientUserId: patient.userId });
                 const vs = await visitServiceDao.create({ visitId: v.id, medicalServiceId: medicalService.id, quantity: 1, price: 500, orderedByUserId: undefined, orderedAt: '' });
-                
+
                 const invoice = await prisma.invoice.create({ data: { patientId: patient.userId, totalAmount: 500 } });
                 await prisma.invoiceItem.create({
                     data: { invoiceId: invoice.id, item_type: 'service', refId: vs.id, name: 'S', quantity: 1, unitPrice: 500, description: 'D' }
@@ -1010,8 +1026,8 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
                 await visitServiceDao.create({ visitId: v.id, medicalServiceId: medicalService.id, quantity: 1, price: 100, orderedByUserId: undefined, orderedAt: '' });
                 const listRes = await visitServiceDao.findAll({ visitId: v.id, page: 1, limit: 10 });
                 await visitServiceDao.updateStatus(listRes.data[0].id, 'done');
-                
-                const res = await visitServiceDao.findByVisit(v.id, { 
+
+                const res = await visitServiceDao.findByVisit(v.id, {
                     status: 'done',
                     startDate: new Date(Date.now() - 86400000).toISOString(),
                     endDate: new Date(Date.now() + 86400000).toISOString() // Future
@@ -1027,7 +1043,7 @@ describe('Integration Test Visit Management DAO - 100 Cases Century Suite', () =
                 const v = await visitDao.createVisit({ ehrId: ehr.id, patientUserId: patient.userId });
                 const vs = await visitServiceDao.create({ visitId: v.id, medicalServiceId: medicalService.id, quantity: 1, price: 100, orderedByUserId: undefined, orderedAt: '' });
                 await visitServiceDao.updateStatus(vs.id, 'in_progress');
-                
+
                 await visitServiceDao.completeVisitServicesByVisit(v.id);
                 const updated = await visitServiceDao.findById(vs.id);
                 expect(updated?.status).toBe('done');

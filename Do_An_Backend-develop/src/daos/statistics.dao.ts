@@ -1,4 +1,4 @@
-﻿import { AppointmentStatus } from '@prisma/client';
+import { AppointmentStatus } from '@prisma/client';
 import prisma from '@config/prisma';
 import { DateTime } from 'luxon';
 

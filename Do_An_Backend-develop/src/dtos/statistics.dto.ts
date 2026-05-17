@@ -1,4 +1,4 @@
-﻿import z from 'zod';
+import z from 'zod';
 
 export const getPatientStatisticsDto = z.object({});
 export type GetPatientStatisticsDto = z.infer<typeof getPatientStatisticsDto>;

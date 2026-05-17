@@ -905,7 +905,7 @@ describe('Unit Test Service - Visit Management (Century Suite 100 Explicit Cases
 
             it('TC_BS_QLK_S_100: [Logic] Hoàn tất lượt khám: Đồng bộ trạng thái Appointment (Transaction coverage)', async () => {
                 await runTest(async () => {
-                    const app = await (prisma as any).appointment.create({ data: { patientUserId, doctorId, startTime: new Date(), status: 'scheduled', reason: 'SQA Test' } });
+                    const app = await (prisma as any).appointment.create({ data: { patient: { connect: { userId: patientUserId } }, doctorId, startTime: new Date(), status: 'scheduled', reason: 'SQA Test' } });
                     const v = await visitService.createVisit({ patientUserId, doctorId, appointmentId: app.id });
                     const res = await visitService.completeVisit(v.id, doctorId, 'doctor');
                     expect(res.status).toBe('completed');

@@ -12,9 +12,25 @@ describe('Integration Test Statistics Service - 15 Cases', () => {
     });
     const runTest = async (fn: (tx: any) => Promise<void>) => {
         await prisma.$transaction(async (tx) => {
-            const originalTx = prisma.$transaction;
-            (prisma as any).$transaction = (cb: any) => cb(tx);
-            try { await fn(tx); } finally { (prisma as any).$transaction = originalTx; }
+            const originals: any = {};
+            const modelNames = Object.keys(prisma).filter(key => 
+                typeof (prisma as any)[key] === 'object' && (prisma as any)[key] !== null && (tx as any)[key]
+            );
+
+            // Swap to tx models
+            modelNames.forEach(name => {
+                originals[name] = (prisma as any)[name];
+                (prisma as any)[name] = (tx as any)[name];
+            });
+
+            try {
+                await fn(tx);
+            } finally {
+                // Restore original models
+                modelNames.forEach(name => {
+                    (prisma as any)[name] = originals[name];
+                });
+            }
             throw new Error('ROLLBACK');
         }).catch(err => { if (err.message !== 'ROLLBACK') throw err; });
     };

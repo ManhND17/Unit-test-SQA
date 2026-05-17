@@ -393,8 +393,8 @@ class MedicalServiceDao {
                     ? 0
                     : 1
                 : totalCount === 0
-                  ? 0
-                  : Math.ceil(totalCount / limitNum);
+                    ? 0
+                    : Math.ceil(totalCount / limitNum);
 
         return {
             data: doctorServices,

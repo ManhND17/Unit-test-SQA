@@ -16,10 +16,10 @@ describe('Integration Test Schedule DAO - SQA Full Suite (15 Cases)', () => {
             const originals: any = {};
             const models = ['schedule', 'appointment', 'user', 'patient', 'staff', 'doctor', 'department', 'room'];
             const originalTx = prisma.$transaction;
-            
+
             // Mock prisma.$transaction to return the current tx
             (prisma as any).$transaction = (cb: any) => cb(tx);
-            
+
             // Mock all models to use the current tx
             models.forEach(m => {
                 if ((prisma as any)[m]) {
@@ -62,10 +62,12 @@ describe('Integration Test Schedule DAO - SQA Full Suite (15 Cases)', () => {
     });
     it('TC_BS_LT_DAO_04 - Pagination: Kiểm tra limit = 1', async () => {
         await runTest(async (tx) => {
-            await tx.schedule.createMany({ data: [
-                { staffId: doctor.id, departmentId: dept.id, roomId: room.id, date: new Date('2026-04-01'), startTime: new Date(), endTime: new Date(), type: 'work' },
-                { staffId: doctor.id, departmentId: dept.id, roomId: room.id, date: new Date('2026-04-02'), startTime: new Date(), endTime: new Date(), type: 'work' }
-            ]});
+            await tx.schedule.createMany({
+                data: [
+                    { staffId: doctor.id, departmentId: dept.id, roomId: room.id, date: new Date('2026-04-01'), startTime: new Date(), endTime: new Date(), type: 'work' },
+                    { staffId: doctor.id, departmentId: dept.id, roomId: room.id, date: new Date('2026-04-02'), startTime: new Date(), endTime: new Date(), type: 'work' }
+                ]
+            });
             const res = await getListSchedules({ limit: '1', date: '01-04-2026' }, doctor.id);
             expect(res.data.length).toBe(1);
         });
